@@ -105,7 +105,7 @@ async def dingus(ctx, whoisdingus, reason=None):
     author = ctx.message.author.mention
     dingusembed = discord.Embed(
         title='Dingus!', 
-        description=f'**{whoisdingus}** is a fucking dingus!', 
+        description=f'**{whoisdingus}** is a dingus! 
         color=0xc59200
     )
     if not reason:
