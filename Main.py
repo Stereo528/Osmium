@@ -1,8 +1,10 @@
 import asyncio
 import discord
 from discord.ext import commands
+from discord.utils import get
 from datetime import date
 from datetime import datetime
+from random import randint
 
 bot = commands.Bot(command_prefix='.')
 today1 = date.today()
@@ -14,6 +16,7 @@ logfile = open('log.txt', 'a')
 logfile.write(f'Bot Started {today1} at {hourString1}\n')
 logfile.close()
 
+quote = ""
 
 ############################################################################################################################
 
@@ -60,7 +63,7 @@ async def stop(ctx):
     stopembed = discord.Embed(
         title = 'Bot Stopped',
         description = f'Bot Stopped at: {hourString} on {today}',
-        color = discord.Color.red()
+        color = discord.Color.dark_red()
     )
     await ctx.send("Stopping...")
     await channel.send(embed=stopembed)
@@ -89,7 +92,7 @@ async def purge(ctx, i):
     purgeembed = discord.Embed(
         title = 'Purged Messages',
         description = f'Purged **{i}** Messages in **{channel}**',
-        color = discord.Color.dark_red()
+        color = discord.Color.red()
     )
     purgeembed.set_footer(text=f'{today} at {hourString}')
 
@@ -102,10 +105,9 @@ async def purge(ctx, i):
 
 @bot.command()
 async def dingus(ctx, whoisdingus, reason=None):
-    author = ctx.message.author.mention
     dingusembed = discord.Embed(
         title='Dingus!', 
-        description=f'**{whoisdingus}** is a dingus! 
+        description=f'**{whoisdingus}** is a dingus!', 
         color=0xc59200
     )
     if not reason:
@@ -116,5 +118,50 @@ async def dingus(ctx, whoisdingus, reason=None):
 
 ############################################################################################################################
 
+@bot.command()
+async def flip(ctx):
+    author = ctx.message.author.mention
+    coinembed = discord.Embed(
+        title='Coin Flip',
+        description=f'{author} Flipped a coin and got:',
+        color=0xA66969
+    )
+
+    coin = randint(0,1)
+    if (coin == 1):
+        coinembed.add_field(name="Heads!", value="\o/", inline=True)
+        await ctx.send(embed=coinembed)
+    else:
+        coinembed.add_field(name="Tails!", value="\o/", inline=True)
+        await ctx.send(embed=coinembed)
+
+############################################################################################################################
+
+@bot.command()
+async def profile(ctx):
+    author = ctx.message.author
+    joinDate = str(author.joined_at).split('.')
+    createDate = str(author.created_at).split('.')
+
+    userRolesList = []
+    for i in author.roles:
+        if ctx.guild.id in i:
+            continue
+        userRolesList.append(i.mention)
+    userRoles = "".join(userRolesList)
+    
+
+    profileembed = discord.Embed(
+        title=f'User Profile',
+        description=f'{author.mention}\'s Profile \nUser ID: **{author}** \nUser Status: {author.status}',
+        color=discord.Color.dark_green()
+    )
+    profileembed.add_field(name="Account Creation Date", value=f'**{createDate[0]} UTC**', inline=True)
+    profileembed.add_field(name="Guild Join Date", value=f'**{joinDate[0]} UTC**', inline=True)
+    profileembed.add_field(name='Roles:', value=userRoles, inline=False)
+    profileembed.set_thumbnail(url=author.avatar_url)
+    await ctx.send(embed=profileembed)
+
+############################################################################################################################
 
 bot.run(TOKEN)
