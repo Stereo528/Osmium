@@ -16,8 +16,6 @@ logfile = open('log.txt', 'a')
 logfile.write(f'Bot Started {today1} at {hourString1}\n')
 logfile.close()
 
-quote = ""
-
 ############################################################################################################################
 
 @bot.event
