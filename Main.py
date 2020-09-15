@@ -142,12 +142,11 @@ async def profile(ctx):
     createDate = str(author.created_at).split('.')
 
     userRolesList = []
-    for i in author.roles:
-        if ctx.guild.id in i:
+    for i in list(ctx.message.author.roles):
+        if "@everyone" in str(i):
             continue
         userRolesList.append(i.mention)
     userRoles = "".join(userRolesList)
-    
 
     profileembed = discord.Embed(
         title=f'User Profile',
