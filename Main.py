@@ -185,4 +185,4 @@ async def profile(ctx, member:discord.Member = None):
 
 ############################################################################################################################
 
-bot.run('NzA3MzE4MTcyNzgwMzMxMDY4.XrHDYQ.jzJ3Tld9CT3Bvi-qkyxkU69pnr0')
+bot.run(TOKEN)
