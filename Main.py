@@ -5,6 +5,7 @@ from discord.utils import get
 from datetime import date
 from datetime import datetime
 from random import randint
+import json
 
 bot = commands.Bot(command_prefix='.')
 today1 = date.today()
@@ -34,6 +35,7 @@ async def on_ready():
     )
     embed.set_footer(text=f'{today} at {hourString}')
     await channel.send(embed=embed)
+    print("Bot Is Online")
 
     
 
@@ -136,29 +138,51 @@ async def flip(ctx):
 ############################################################################################################################
 
 @bot.command()
-async def profile(ctx):
-    author = ctx.message.author
-    joinDate = str(author.joined_at).split('.')
-    createDate = str(author.created_at).split('.')
+async def profile(ctx, member:discord.Member = None):
+    if member == None:
+        member = ctx.message.author
+        joinDate = str(member.joined_at).split('.')
+        createDate = str(member.created_at).split('.')
 
-    userRolesList = []
-    for i in list(ctx.message.author.roles):
-        if "@everyone" in str(i):
-            continue
-        userRolesList.append(i.mention)
-    userRoles = "".join(userRolesList)
+        userRolesList = []
+        for i in list(member.roles):
+            if "@everyone" in str(i):
+                continue
+            userRolesList.append(i.mention)
+        userRoles = "".join(userRolesList)
 
-    profileembed = discord.Embed(
-        title=f'User Profile',
-        description=f'{author.mention}\'s Profile \nUser ID: **{author}** \nUser Status: {author.status}',
-        color=discord.Color.dark_green()
-    )
-    profileembed.add_field(name="Account Creation Date", value=f'**{createDate[0]} UTC**', inline=True)
-    profileembed.add_field(name="Guild Join Date", value=f'**{joinDate[0]} UTC**', inline=True)
-    profileembed.add_field(name='Roles:', value=userRoles, inline=False)
-    profileembed.set_thumbnail(url=author.avatar_url)
-    await ctx.send(embed=profileembed)
+        profileembed = discord.Embed(
+            title=f'User Profile',
+            description=f'{member.mention}\'s Profile \nUser ID: **{member}** \nUser Status: {member.status}',
+            color=discord.Color.dark_green()
+        )
+        profileembed.add_field(name="Account Creation Date", value=f'**{createDate[0]} UTC**', inline=True)
+        profileembed.add_field(name="Guild Join Date", value=f'**{joinDate[0]} UTC**', inline=True)
+        profileembed.add_field(name='Roles:', value=userRoles, inline=False)
+        profileembed.set_thumbnail(url=member.avatar_url)
+        await ctx.send(embed=profileembed)
+    else:
+        joinDate = str(member.joined_at).split('.')
+        createDate = str(member.created_at).split('.')
+
+        userRolesList = []
+        for i in list(member.roles):
+            if "@everyone" in str(i):
+                continue
+            userRolesList.append(i.mention)
+        userRoles = "".join(userRolesList)
+
+        profileembed = discord.Embed(
+            title=f'User Profile',
+            description=f'{member.mention}\'s Profile \nUser ID: **{member}** \nUser Status: {member.status}',
+            color=discord.Color.dark_green()
+        )
+        profileembed.add_field(name="Account Creation Date", value=f'**{createDate[0]} UTC**', inline=True)
+        profileembed.add_field(name="Guild Join Date", value=f'**{joinDate[0]} UTC**', inline=True)
+        profileembed.add_field(name='Roles:', value=userRoles, inline=False)
+        profileembed.set_thumbnail(url=member.avatar_url)
+        await ctx.send(embed=profileembed)
 
 ############################################################################################################################
 
-bot.run(TOKEN)
+bot.run('NzA3MzE4MTcyNzgwMzMxMDY4.XrHDYQ.jzJ3Tld9CT3Bvi-qkyxkU69pnr0')
