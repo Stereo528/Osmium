@@ -10,7 +10,7 @@
  5. Run Main.py
  
 ## Features
-- Logging of Bot going Onine and Offline
+- Logging of Bot going Online and Offline
 - Purge Command
 - "Dingus" Command
 - API response time check
