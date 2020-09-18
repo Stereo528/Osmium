@@ -17,6 +17,16 @@ logfile.close()
 
 try:
     configload = open("config.json", "x")
+    configload.close()
+    configwrite = open("config.json", "w")
+    config = {
+        "token": "Input Token Here from https://discord.com/developers/applications/"
+    }
+
+    y = json.dumps(config, indent=4)
+    configwrite.write(y)
+    configwrite.close()
+    print("CHANGE config.json TO HAVE YOUR BOT TOKEN FROM https://discord.com/developers/applications/")
 except FileExistsError:
     print("Config File Already Exists")
 
