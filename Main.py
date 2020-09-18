@@ -32,12 +32,7 @@ except FileExistsError:
 
 
 with open("config.json", "r") as config:
-    token = json.load(config)
-
-
-
-
-
+    configloaded = json.load(config)
 
 ############
 
@@ -211,5 +206,5 @@ async def profile(ctx, member: discord.Member = None):
 
 ############
 
-bot.run(token["token"])
+bot.run(configloaded["token"])
 
