@@ -16,6 +16,16 @@ logfile.write(f'Bot Started {today1} at {hourString1}\n')
 logfile.close()
 
 try:
+    launchload = open("launches.json", "x")
+    launchload.close()
+    launchwrite = open("launches.json", "w")
+    launch = {
+        "launches": "1"
+    }
+    x = json.dumps(launch, indent=4)
+    launchwrite.write(x)
+    launchwrite.close()
+
     configload = open("config.json", "x")
     configload.close()
     configwrite = open("config.json", "w")
@@ -34,6 +44,15 @@ except FileExistsError:
 with open("config.json", "r") as config:
     configloaded = json.load(config)
 
+with open("launches.json", "r") as launch:
+    launchp1 = json.load(launch)
+
+launched = launchp1["launches"]
+launchp1["launches"] = int(launched) + 1
+
+with open("launches.json", "w") as out:
+    out.write(json.dumps(launchp1, indent=4))
+
 ############
 
 @bot.event
@@ -47,7 +66,7 @@ async def on_ready():
     user = bot.get_user(707318172780331068)
     embed = discord.Embed(
         title='Bot Started',
-        description=f'Bot Started in: **{server}** \nBot User is: **{user}**',
+        description=f'Bot Started in: **{server}** \nBot User is: **{user}** \nLaunch #: **{launchp1["launches"]}**',
         color=discord.Color.green()
     )
     embed.set_footer(text=f'{today} at {hourString}')
@@ -203,6 +222,18 @@ async def profile(ctx, member: discord.Member = None):
         profileembed.set_thumbnail(url=member.avatar_url)
         await ctx.send(embed=profileembed)
 
+
+############
+
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        embed = discord.Embed(
+            title="Incorrect Command",
+            color=0xff0000,
+            description=f"The command `{(ctx.message.content).split(' ')[0]}` doesn't exist")
+        await ctx.send(embed=embed)
+        return
 
 ############
 
