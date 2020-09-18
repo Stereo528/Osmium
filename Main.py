@@ -1,4 +1,3 @@
-import asyncio
 import discord
 from discord.ext import commands
 from discord.utils import get
@@ -12,12 +11,25 @@ today1 = date.today()
 hour1 = datetime.now()
 hourString1 = hour1.strftime("%H:%M:%S")
 
-
 logfile = open('log.txt', 'a')
 logfile.write(f'Bot Started {today1} at {hourString1}\n')
 logfile.close()
 
-############################################################################################################################
+try:
+    configload = open("config.json", "x")
+except FileExistsError:
+    print("Config File Already Exists")
+
+
+with open("config.json", "r") as config:
+    token = json.load(config)
+
+
+
+
+
+
+############
 
 @bot.event
 async def on_ready():
@@ -29,29 +41,29 @@ async def on_ready():
     server = bot.get_guild(541332714880499735)
     user = bot.get_user(707318172780331068)
     embed = discord.Embed(
-        title = 'Bot Started',
-        description = f'Bot Started in: **{server}** \nBot User is: **{user}**',
-        color = discord.Color.green()
+        title='Bot Started',
+        description=f'Bot Started in: **{server}** \nBot User is: **{user}**',
+        color=discord.Color.green()
     )
     embed.set_footer(text=f'{today} at {hourString}')
     await channel.send(embed=embed)
     print("Bot Is Online")
 
-    
 
-############################################################################################################################
+############
 
 @bot.command()
 async def ping(ctx):
     apiping = int(bot.latency * 1000)
     apiembed = discord.Embed(
-        title = "API Ping",
-        description = f'{apiping} ms',
-        color = discord.Color.blurple()
+        title="API Ping",
+        description=f'{apiping} ms',
+        color=discord.Color.blurple()
     )
     await ctx.send(embed=apiembed)
 
-############################################################################################################################
+
+############
 
 @bot.command()
 async def stop(ctx):
@@ -61,9 +73,9 @@ async def stop(ctx):
 
     channel = bot.get_channel(742585460760772709)
     stopembed = discord.Embed(
-        title = 'Bot Stopped',
-        description = f'Bot Stopped at: {hourString} on {today}',
-        color = discord.Color.dark_red()
+        title='Bot Stopped',
+        description=f'Bot Stopped at: {hourString} on {today}',
+        color=discord.Color.dark_red()
     )
     await ctx.send("Stopping...")
     await channel.send(embed=stopembed)
@@ -71,9 +83,10 @@ async def stop(ctx):
     logfile = open('log.txt', 'a')
     logfile.write(f'Bot Stopped {today} at {hourString}\n\n')
     logfile.close()
+    config.close()
 
 
-############################################################################################################################
+############
 
 @bot.command()
 async def purge(ctx, i):
@@ -88,11 +101,11 @@ async def purge(ctx, i):
 
     async for message in channel.history(limit=i):
         messages.append(message)
-    
+
     purgeembed = discord.Embed(
-        title = 'Purged Messages',
-        description = f'Purged **{i}** Messages in **{channel}**',
-        color = discord.Color.red()
+        title='Purged Messages',
+        description=f'Purged **{i}** Messages in **{channel}**',
+        color=discord.Color.red()
     )
     purgeembed.set_footer(text=f'{today} at {hourString}')
 
@@ -101,13 +114,13 @@ async def purge(ctx, i):
     await botlog.send(embed=purgeembed)
 
 
-############################################################################################################################
+############
 
 @bot.command()
 async def dingus(ctx, whoisdingus, reason=None):
     dingusembed = discord.Embed(
-        title='Dingus!', 
-        description=f'**{whoisdingus}** is a dingus!', 
+        title='Dingus!',
+        description=f'**{whoisdingus}** is a dingus!',
         color=0xc59200
     )
     if not reason:
@@ -116,7 +129,8 @@ async def dingus(ctx, whoisdingus, reason=None):
         dingusembed.add_field(name='Reason:', value=f'{reason}', inline=True)
         await ctx.send(embed=dingusembed)
 
-############################################################################################################################
+
+############
 
 @bot.command()
 async def flip(ctx):
@@ -127,7 +141,7 @@ async def flip(ctx):
         color=0xA66969
     )
 
-    coin = randint(0,1)
+    coin = randint(0, 1)
     if (coin == 1):
         coinembed.add_field(name="Heads!", value="\o/", inline=True)
         await ctx.send(embed=coinembed)
@@ -135,10 +149,11 @@ async def flip(ctx):
         coinembed.add_field(name="Tails!", value="\o/", inline=True)
         await ctx.send(embed=coinembed)
 
-############################################################################################################################
+
+############
 
 @bot.command()
-async def profile(ctx, member:discord.Member = None):
+async def profile(ctx, member: discord.Member = None):
     if member == None:
         member = ctx.message.author
         joinDate = str(member.joined_at).split('.')
@@ -183,6 +198,7 @@ async def profile(ctx, member:discord.Member = None):
         profileembed.set_thumbnail(url=member.avatar_url)
         await ctx.send(embed=profileembed)
 
-############################################################################################################################
 
-bot.run('NzA3MzE4MTcyNzgwMzMxMDY4.XrHDYQ.jzJ3Tld9CT3Bvi-qkyxkU69pnr0')
+############
+
+bot.run(token["token"])
