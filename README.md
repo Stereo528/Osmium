@@ -6,8 +6,9 @@
  1. Download Main.py
  2. Install Discord.py (https://discordpy.readthedocs.io/en/latest/intro.html#installing)
  3. Insert your **own** bot Token
- 4. Invite the Bot to your server
- 5. Run Main.py
+ 4. Change all of the hardcoded channel IDs
+ 5. Invite the Bot to your server
+ 6. Run Main.py
  
 ## Features
 - Logging of Bot going Online and Offline
