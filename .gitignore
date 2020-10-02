@@ -1,4 +1,3 @@
-
 log.txt
 .idea/DBPython.iml
 .idea/inspectionProfiles/profiles_settings.xml
@@ -8,3 +7,6 @@ log.txt
 .idea/workspace.xml
 config.json
 launches.json
+rules.py
+.gitignore
+youtube-banner.png

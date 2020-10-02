@@ -1,12 +1,12 @@
-import discord
+import discord, json, os
 from discord.ext import commands
-from discord.utils import get
+# from discord.utils import get
 from datetime import date
 from datetime import datetime
 from random import randint
-import json
 
-bot = commands.Bot(command_prefix='.')
+intents = discord.Intents().all()
+bot = commands.Bot(command_prefix='.', intents=intents)
 today1 = date.today()
 hour1 = datetime.now()
 hourString1 = hour1.strftime("%H:%M:%S")
@@ -40,7 +40,6 @@ try:
 except FileExistsError:
     print("Config File Already Exists")
 
-
 with open("config.json", "r") as config:
     configloaded = json.load(config)
 
@@ -52,6 +51,7 @@ launchp1["launches"] = int(launched) + 1
 
 with open("launches.json", "w") as out:
     out.write(json.dumps(launchp1, indent=4))
+
 
 ############
 
@@ -104,10 +104,9 @@ async def stop(ctx):
     await ctx.send("Stopping...")
     await channel.send(embed=stopembed)
     await bot.logout()
-    logfile = open('log.txt', 'a')
-    logfile.write(f'Bot Stopped {today} at {hourString}\n\n')
-    logfile.close()
-    config.close()
+    with open('log.txt', 'a') as logfile1:
+        logfile1.write(f'Bot Stopped {today} at {hourString}\n\n')
+    print("Bot Offline")
 
 
 ############
@@ -166,11 +165,11 @@ async def flip(ctx):
     )
 
     coin = randint(0, 1)
-    if (coin == 1):
-        coinembed.add_field(name="Heads!", value="\o/", inline=True)
+    if coin == 1:
+        coinembed.add_field(name="Heads!", value="\oo/", inline=True)
         await ctx.send(embed=coinembed)
     else:
-        coinembed.add_field(name="Tails!", value="\o/", inline=True)
+        coinembed.add_field(name="Tails!", value="\oo/", inline=True)
         await ctx.send(embed=coinembed)
 
 
@@ -192,7 +191,7 @@ async def profile(ctx, member: discord.Member = None):
 
         profileembed = discord.Embed(
             title=f'User Profile',
-            description=f'{member.mention}\'s Profile \nUser ID: **{member}** \nUser Status: {member.status}',
+            description=f'{member.mention}\'s Profile \nUser ID: **{member}** \nUser Status: {member.status} \nUser Custom Status: \"{member.activity}\"',
             color=discord.Color.dark_green()
         )
         profileembed.add_field(name="Account Creation Date", value=f'**{createDate[0]} UTC**', inline=True)
@@ -213,7 +212,7 @@ async def profile(ctx, member: discord.Member = None):
 
         profileembed = discord.Embed(
             title=f'User Profile',
-            description=f'{member.mention}\'s Profile \nUser ID: **{member}** \nUser Status: {member.status}',
+            description=f"{member.mention}\'s Profile \nUser ID: **{member}** \nUser Status: {member.status} \nUser Custom Status: \"{member.activity}\"",
             color=discord.Color.dark_green()
         )
         profileembed.add_field(name="Account Creation Date", value=f'**{createDate[0]} UTC**', inline=True)
@@ -225,17 +224,72 @@ async def profile(ctx, member: discord.Member = None):
 
 ############
 
+@bot.command(aliases=["info"])
+async def about(ctx):
+    infoembed = discord.Embed(
+        title="About",
+        description='',
+        color=0x345678
+    )
+    infoembed.add_field(name="Bot Creator:", value="Stereo528#1225   ", inline=True)
+    infoembed.add_field(name="Launch Number:", value=f'**{launchp1["launches"]}**', inline=False)
+    infoembed.set_thumbnail(url="https://cdn.discordapp.com/avatars/707318172780331068/f071b6a0c993ac524b261d50f7b403eb.webp?size=1024")
+    await ctx.send(embed=infoembed)
+
+
+############
+
+@bot.command()
+async def cape(ctx, username=None):
+    if not username:
+        errorembed = discord.Embed(
+            title="Please Pass a Minecraft Username",
+            color=0xff0000
+        )
+        await ctx.send(embed=errorembed)
+    else:
+        capeembed = discord.Embed(
+        title='Cape',
+        color=0xe29f00
+        )
+        capeembed.set_image(url=f"http://s.optifine.net/capes/{username}.png")
+        await ctx.send(embed=capeembed)
+
+###########
+
+
+
+
+############
+
+#Load Cogs
+
+#@bot.command()
+#async def load(ctx, extension):
+#    bot.load_extension(f'cogs.{extension}')
+#
+#@bot.command()
+#async def unload(ctx, extension):
+#    bot.unload_extension(f'cogs.{extension}')
+#
+#
+#for filename in os.listdir('./cogs/'):
+#    if filename.endswith('.py'):
+#        bot.load_extension(f'cogs.{filename[:-3]}')
+        
+############
+
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
         embed = discord.Embed(
-            title="Incorrect Command",
+            title="Unknown Command",
             color=0xff0000,
-            description=f"The command `{(ctx.message.content).split(' ')[0]}` doesn't exist")
+            description=f"The command `{ctx.message.content.split(' ')[0]}` is not found")
         await ctx.send(embed=embed)
         return
 
 ############
 
-bot.run(configloaded["token"])
 
+bot.run(configloaded["token"])
