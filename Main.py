@@ -61,6 +61,8 @@ async def on_ready():
     hour = datetime.now()
     hourString = hour.strftime("%H:%M:%S")
 
+    await bot.change_presence(status=discord.Status.online, activity=discord.Game(name="With the Discord.py API"))
+
     channel = bot.get_channel(742585460760772709)
     server = bot.get_guild(541332714880499735)
     user = bot.get_user(707318172780331068)
@@ -166,10 +168,10 @@ async def flip(ctx):
 
     coin = randint(0, 1)
     if coin == 1:
-        coinembed.add_field(name="Heads!", value="\oo/", inline=True)
+        coinembed.add_field(name="Heads!", value="\o/", inline=True)
         await ctx.send(embed=coinembed)
     else:
-        coinembed.add_field(name="Tails!", value="\oo/", inline=True)
+        coinembed.add_field(name="Tails!", value="\o/", inline=True)
         await ctx.send(embed=coinembed)
 
 
