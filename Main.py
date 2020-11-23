@@ -25,7 +25,7 @@ try:
     print("CHANGE config.json TO HAVE YOUR BOT TOKEN FROM https://discord.com/developers/applications/")
     
 except FileExistsError:
-    pass
+    print("Config Loaded")
 
 
 with open("config.json", "r") as config:
@@ -37,11 +37,11 @@ with open("config.json", "r") as config:
 
 @bot.command()
 async def load(ctx, extension):
-    bot.load_extension(f'cogs.{extension}')
+    bot.load_extension(f'commands.{extension}')
 
 @bot.command()
 async def unload(ctx, extension):
-    bot.unload_extension(f'cogs.{extension}')
+    bot.unload_extension(f'commands.{extension}')
 
 #@bot.command()
 #async def reload(ctx, extension):
@@ -50,16 +50,16 @@ async def unload(ctx, extension):
 
 @bot.command()
 async def reload(ctx):
-    for filename in os.listdir('./cogs/'):
+    for filename in os.listdir('./commands/'):
         if filename.endswith('.py'):
-            bot.unload_extension(f'cogs.{filename[:-3]}')
-            bot.load_extension(f'cogs.{filename[:-3]}')
+            bot.unload_extension(f'commands.{filename[:-3]}')
+            bot.load_extension(f'commands.{filename[:-3]}')
     await ctx.send("Reloaded Cogs")
 
 #load cogs on startup
-for filename in os.listdir('./cogs/'):
+for filename in os.listdir('./commands/'):
     if filename.endswith('.py'):
-        bot.load_extension(f'cogs.{filename[:-3]}')
+        bot.load_extension(f'commands.{filename[:-3]}')
         
 ############
 
