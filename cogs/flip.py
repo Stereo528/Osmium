@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from random import randint
 
-class Test(commands.Cog):
+class Fun(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -24,4 +24,4 @@ class Test(commands.Cog):
             await ctx.send(embed=coinembed)
 
 def setup(client):
-    client.add_cog(Test(client))
+    client.add_cog(Fun(client))

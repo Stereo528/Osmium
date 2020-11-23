@@ -25,7 +25,7 @@ class Test(commands.Cog):
         )
         embed.set_footer(text=f'{today} at {hourString}')
         await channel.send(embed=embed)
-        print("client Is Online")
+        print("Client Is Online")
 
 def setup(client):
     client.add_cog(Test(client))
