@@ -6,4 +6,4 @@ launches.json
 rules.py
 .gitignore
 youtube-banner.png
-cogs/__pycache__/
+commands/__pycache__/
