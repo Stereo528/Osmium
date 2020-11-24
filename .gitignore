@@ -2,8 +2,4 @@ log.txt
 .idea/
 .vscode/
 config.json
-launches.json
-rules.py
-.gitignore
-youtube-banner.png
 commands/__pycache__/
