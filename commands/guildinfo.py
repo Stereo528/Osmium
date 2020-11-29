@@ -15,16 +15,15 @@ class Admin(commands.Cog):
         ServerIcon = server.icon_url #
         ServerOwner = server.owner #
         ServerOwnerID = server.owner_id #
-        ServerDesc = server.description #
         NitroLevel = server.premium_tier #
         NitroBoosts = server.premium_subscription_count #
         MemberCount = server.member_count #
         CreatedAt = server.created_at #
-        EmojiLimit = server.emoji_limit
-        FilesizeLimit = server.filesize_limit
+        EmojiLimit = server.emoji_limit #
+        FilesizeLimit = server.filesize_limit #
 
         Nitro = f"Nitro Level: {NitroLevel}, Nitro Boosters: {NitroBoosts}"
-        MainServerInfo = f"Server Desc: {ServerDesc} \nEmoji Limit: {EmojiLimit} \nFilesize Limit: {round(FilesizeLimit/1000000)} megabytes"
+        MainServerInfo = f"Emoji Limit: {EmojiLimit} \nFilesize Limit: {round(FilesizeLimit/1000000)} megabytes"
         Owner=f"Server Owner: {ServerOwner} \nOwner ID: {ServerOwnerID}"
         
         embed=discord.Embed(
