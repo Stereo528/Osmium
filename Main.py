@@ -1,6 +1,5 @@
 import discord, json, os
 from discord.ext import commands
-# from discord.utils import get
 from datetime import date
 from datetime import datetime
 
@@ -10,23 +9,6 @@ bot = commands.Bot(command_prefix='.', intents=intents)
 today1 = date.today()
 hour1 = datetime.now()
 hourString1 = hour1.strftime("%H:%M:%S")
-
-try:
-    configload = open("config.json", "x")
-    configload.close()
-    configwrite = open("config.json", "w")
-    config = {
-        "token": "Input Token Here from https://discord.com/developers/applications/"
-    }
-
-    y = json.dumps(config, indent=4)
-    configwrite.write(y)
-    configwrite.close()
-    print("CHANGE config.json TO HAVE YOUR BOT TOKEN FROM https://discord.com/developers/applications/")
-    
-except FileExistsError:
-    print("Config Loaded")
-
 
 with open("config.json", "r") as config:
     configloaded = json.load(config)

@@ -3,3 +3,4 @@ log.txt
 .vscode/
 config.json
 commands/__pycache__/
+json.json
