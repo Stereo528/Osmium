@@ -28,7 +28,7 @@ class Util(commands.Cog):
             jsonopen.close()
             
             jsonfile = discord.File("json.json", filename="Result.json")
-            await ctx.send(f"Wrote: `\"{json1}\": \"{json2}\"` to `json.json`", file=jsonfile)
+            await ctx.send(f"Wrote: `\"{json1}\": \"{json2}\"` to `Result.json`", file=jsonfile)
 
 
 def setup(client):

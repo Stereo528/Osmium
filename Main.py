@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 intents = discord.Intents().all()
-bot = commands.Bot(command_prefix='.', intents=intents)
+bot = commands.Bot(command_prefix='.', intents=intents, help_command=None)
 today1 = date.today()
 hour1 = datetime.now()
 hourString1 = hour1.strftime("%H:%M:%S")
@@ -24,6 +24,8 @@ async def load(ctx, extension):
 @bot.command()
 async def unload(ctx, extension):
     bot.unload_extension(f'commands.{extension}')
+
+        
 
 #@bot.command()
 #async def reload(ctx, extension):
