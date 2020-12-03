@@ -25,20 +25,16 @@ async def load(ctx, extension):
 async def unload(ctx, extension):
     bot.unload_extension(f'commands.{extension}')
 
-        
-
-#@bot.command()
-#async def reload(ctx, extension):
-#    bot.unload_extension(f'cogs.{extension}')
-#    bot.load_extension(f'cogs.{extension}')
-
 @bot.command()
 async def reload(ctx):
-    for filename in os.listdir('./commands/'):
-        if filename.endswith('.py'):
-            bot.unload_extension(f'commands.{filename[:-3]}')
-            bot.load_extension(f'commands.{filename[:-3]}')
-    await ctx.send("Reloaded Cogs")
+    try:
+        for filename in os.listdir('./commands/'):
+            if filename.endswith('.py'):
+                bot.unload_extension(f'commands.{filename[:-3]}')
+                bot.load_extension(f'commands.{filename[:-3]}')
+        await ctx.send("Reloaded Cogs")
+    except:
+        await ctx.send("Oopsie Woopsie!! The code monkeys at our headquarters are working VEWY HAWD to fix this!")
 
 #load cogs on startup
 for filename in os.listdir('./commands/'):
