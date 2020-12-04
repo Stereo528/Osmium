@@ -3,7 +3,7 @@ from discord.ext import commands
 
 localFormat = "%Y-%m-%d %H:%M:%S"
 
-UTC=datetime.datetime.utcnow()
+UTC=datetime.datetime.now(timezone('UTC'))
 
 timezonelist = ["US/Eastern", "US/Central", "US/Mountain", "US/Pacific", "Etc/UTC", "Europe/Berlin", "Australia/North", "Australia/South", "Australia/West"]
 
@@ -14,8 +14,8 @@ class Util(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(aliases=["time", "tz", "tzone", "timez", "timezones"])
-    async def timezone(self, ctx):
+    @commands.command(aliases=["timezone", "tz", "tzone", "timez", "timezones"])
+    async def time(self, ctx):
         timezones = discord.Embed(
             title="Timezones",
             description="A list of timezones",
