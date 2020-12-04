@@ -1,13 +1,12 @@
-import discord, pytz, datetime
+import discord, datetime
 from discord.ext import commands
+from pytz import timezone
 
-localFormat = "%Y-%m-%d %H:%M:%S"
+localFormat = "%Y-%m-%d %H:%M:%S, %Z%z"
 
 UTC=datetime.datetime.now(timezone('UTC'))
 
-timezonelist = ["US/Eastern", "US/Central", "US/Mountain", "US/Pacific", "Etc/UTC", "Europe/Berlin", "Australia/North", "Australia/South", "Australia/West"]
-
-
+timezonelist = ["US/Eastern", "US/Central", "US/Mountain", "US/Pacific", "UTC", "Europe/Berlin", "Australia/North", "Australia/South", "Australia/West"]
 
 
 class Util(commands.Cog):
@@ -23,8 +22,8 @@ class Util(commands.Cog):
         )
         #timezones.add_field(name="UTC", value=UTC)
         for tz in timezonelist:
-            localDatetime = UTC.datetime.astimezone(datetime.timezone(tz))
-            x = localDatetime.datetime.strftime(localFormat)
+            localDatetime = UTC.astimezone(timezone(tz))
+            x = localDatetime.strftime(localFormat)
             timezones.add_field(name=tz, value=x, inline=False)
 
 
