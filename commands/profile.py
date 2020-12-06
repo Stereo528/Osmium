@@ -7,7 +7,7 @@ class Admin(commands.Cog):
 
     @commands.command()
     async def profile(self, ctx, member: discord.Member = None):
-        if member == None:
+        if not member:
             member = ctx.message.author
             joinDate = str(member.joined_at).split('.')
             createDate = str(member.created_at).split('.')
