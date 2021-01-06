@@ -4,4 +4,4 @@ log.txt
 config.json
 commands/__pycache__/
 json.json
-animal.json
+.animal/

@@ -1,15 +1,6 @@
-import discord, requests, json
+import discord, requests, json, dog, cat
+from random import randint
 from discord.ext import commands
-
-r = requests.get("https://dog.ceo/api/breeds/image/random")
-jsonify=r.json()
-jsonopen=open("animal.json", "w")
-y=json.dumps(jsonify, indent=4)
-jsonopen.write(y)
-jsonopen.close()
-
-with open("animal.json", "r") as work:
-    pls = json.load(work)
 
 class Fun(commands.Cog):
     def __init__(self, client):
@@ -18,7 +9,9 @@ class Fun(commands.Cog):
     @commands.command()
     async def animal(self, ctx, wanimal=None):
         if not wanimal:
-            await ctx.send(pls["message"])
+            dog.getDog(directory="../animal", filename="dog")
+            dogimg = discord.File("../animal/dog.jpg")
+            await ctx.send(file=dogimg)
 
 
 def setup(client):
