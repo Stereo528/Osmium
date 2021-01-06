@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-class Test(commands.Cog):
+class Util(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -12,4 +12,4 @@ class Test(commands.Cog):
         print("Client Is Online")
 
 def setup(client):
-    client.add_cog(Test(client))
+    client.add_cog(Util(client))

@@ -20,11 +20,13 @@ with open("config.json", "r") as config:
 @bot.command()
 async def load(ctx, extension):
     bot.load_extension(f'commands.{extension}')
+    await ctx.send(f"loaded {extension}")
 
 
 @bot.command()
 async def unload(ctx, extension):
     bot.unload_extension(f'commands.{extension}')
+    await ctx.send(f"unloaded {extension}")
 
 
 @bot.command()
@@ -38,7 +40,7 @@ async def reload(ctx):
     except:
         error = discord.Embed(
             title="Oopsie Woopsie!!1",
-            description="The code monkeys at our headquarters are working VEWY HAWD to fix this!!1!",
+            description="The code monkeys at our headquarters are working VEWY HAWD to fix this!!1!" + error,
             color=discord.Color.dark_red()
         )
         await ctx.send(embed=error)
