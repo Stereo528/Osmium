@@ -37,7 +37,7 @@ async def reload(ctx):
                 bot.unload_extension(f'commands.{filename[:-3]}')
                 bot.load_extension(f'commands.{filename[:-3]}')
         await ctx.send("Reloaded Cogs")
-    except:
+    except as error:
         error = discord.Embed(
             title="Oopsie Woopsie!!1",
             description="The code monkeys at our headquarters are working VEWY HAWD to fix this!!1!" + error,
