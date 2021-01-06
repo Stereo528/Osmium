@@ -9,8 +9,8 @@ class Fun(commands.Cog):
     @commands.command()
     async def animal(self, ctx, wanimal=None):
         if not wanimal:
-            dog.getDog(directory="../animal", filename="dog")
-            dogimg = discord.File("../animal/dog.jpg")
+            dog.getDog(directory="C:/Users/Studio528/Documents/GitHub/DBPython/animal", filename="dog")
+            dogimg = discord.File("animal/dog.jpg")
             await ctx.send(file=dogimg)
 
 
