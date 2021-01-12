@@ -2,7 +2,8 @@ log.txt
 .idea/
 .vscode/
 config.json
-commands/__pycache__/
+commands/__pycache__/*
+__pycache__/*
 json.json
 animal/
 dog.jpg

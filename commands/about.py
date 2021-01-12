@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from Main import getBot, getUser
 
 class Admin(commands.Cog):
     def __init__(self, client):
@@ -9,11 +10,12 @@ class Admin(commands.Cog):
     async def about(self, ctx):
         infoembed = discord.Embed(
             title="About",
-            description='',
+            description=getBot("id"),
             color=0x345678
         )
-        infoembed.add_field(name="Bot Creator:", value="Stereo528#1225   ", inline=True)
-        infoembed.set_thumbnail(url="https://cdn.discordapp.com/avatars/707318172780331068/f071b6a0c993ac524b261d50f7b403eb.webp?size=1024")
+        infoembed.add_field(name="Bot Creator:", value=getUser(296116954421264384), inline=True)
+        infoembed.add_field(name="Info", value=f"Id: {getBot('id')}, \nMention: {getBot('mention')}", inline=False)
+        infoembed.set_thumbnail(url=getBot("avatar_url"))
         await ctx.send(embed=infoembed)
     
 def setup(client):

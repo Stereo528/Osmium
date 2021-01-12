@@ -15,6 +15,29 @@ with open("config.json", "r") as config:
 
 ############
 
+# Get Bot Things
+def getBot(botParam):
+    if not botParam:
+        return "Provide a Valid Parameter"
+    elif botParam == "id":
+        return str(bot.user.id)
+    elif botParam == "avatar_url":
+        return str(bot.user.avatar_url)
+    elif botParam == "created_at":
+        return str(bot.user.created_at)
+    elif botParam == "mention":
+        return str(bot.user.mention)
+    else:
+        return "That Parameter Does Not Exist (Yet)"
+
+
+# Get Other Things
+def getUser(userID):
+    return bot.get_user(userID)
+
+
+############
+
 # Load Cogs
 
 @bot.command()
@@ -37,10 +60,10 @@ async def reload(ctx):
                 bot.unload_extension(f'commands.{filename[:-3]}')
                 bot.load_extension(f'commands.{filename[:-3]}')
         await ctx.send("Reloaded Cogs")
-    except as error:
+    except:
         error = discord.Embed(
             title="Oopsie Woopsie!!1",
-            description="The code monkeys at our headquarters are working VEWY HAWD to fix this!!1!" + error,
+            description="The code monkeys at our headquarters are working VEWY HAWD to fix this!!1!",
             color=discord.Color.dark_red()
         )
         await ctx.send(embed=error)
@@ -63,6 +86,13 @@ async def on_command_error(ctx, error):
             description=f"The command `{ctx.message.content.split(' ')[0]}` is not found! Use `.help` to list all commands!")
         await ctx.send(embed=embed)
         return
+    else:
+        embed = discord.Embed(
+            title="Error",
+            color=0xff0000,
+            description=f"Unexpected Error: `{error}`"
+        )
+        await ctx.send(embed=embed)
 
 
 ############

@@ -8,22 +8,22 @@ class Admin(commands.Cog):
         self.client = client
 
     @commands.command()
-    async def purge(self, ctx, i):
+    async def purge(self, ctx, msgCount):
         today = date.today()
         hour = datetime.now()
         hourString = hour.strftime("%H:%M:%S")
 
-        i = int(i)
+        msgCount = int(msgCount)
         channel = ctx.message.channel
         botlog = self.client.get_channel(742585460760772709)
         messages = []
 
-        async for message in channel.history(limit=i):
+        async for message in channel.history(limit=msgCount):
             messages.append(message)
 
         purgeembed = discord.Embed(
             title='Purged Messages',
-            description=f'Purged **{i}** Messages in **{channel}**',
+            description=f'Purged **{msgCount}** Messages in **{channel}**',
             color=discord.Color.red()
         )
         purgeembed.set_footer(text=f'{today} at {hourString}')
