@@ -6,13 +6,13 @@ class Fun(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(aliases=["dice"])
-    async def roll(self, ctx, DiceSides):
-        int(DiceSides)
-        DiceFinal = randint(0, DiceSides)
+    @commands.command(aliases=["dice", "d"])
+    async def roll(self, ctx, DiceSides, DiceCount=None):
+        DiceSides = int(DiceSides)
+        DiceFinal = randint(1, DiceSides)
         embed = discord.Embed(
-            title=f"Rolling a d",
-            description="You Rolled a: " + str(DiceFinal) + "!"
+            title=f"Rolling a d{DiceSides}",
+            description=f"You Rolled a {DiceFinal}"
         )
         await ctx.send(embed=embed)
 

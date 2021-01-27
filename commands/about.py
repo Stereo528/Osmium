@@ -10,7 +10,6 @@ class Admin(commands.Cog):
     async def about(self, ctx):
         infoembed = discord.Embed(
             title="About",
-            description=getBot("id"),
             color=0x345678
         )
         infoembed.add_field(name="Bot Creator:", value=getUser(296116954421264384), inline=True)

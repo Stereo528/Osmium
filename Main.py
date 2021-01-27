@@ -52,7 +52,7 @@ async def unload(ctx, extension):
     await ctx.send(f"unloaded {extension}")
 
 
-@bot.command()
+@bot.command(aliases=["relaod"])
 async def reload(ctx):
     try:
         for filename in os.listdir('./commands/'):
