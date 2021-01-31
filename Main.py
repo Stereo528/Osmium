@@ -9,6 +9,8 @@ bot = commands.Bot(command_prefix='.', intents=intents, help_command=None)
 with open("config.json", "r") as config:
     configloaded = json.load(config)
 
+OwnerId = configloaded["ownerID"]
+OwnerId=str(OwnerId)
 
 ############
 
@@ -31,7 +33,6 @@ def getBot(botParam):
 # Get Other Things
 def getUser(userParam):
     return bot.get_user(userID)
-
 
 ############
 
@@ -57,7 +58,7 @@ async def reload(ctx):
                 bot.unload_extension(f'commands.{filename[:-3]}')
                 bot.load_extension(f'commands.{filename[:-3]}')
         await ctx.send("Reloaded Cogs")
-    except(e):
+    except e:
         error = discord.Embed(
             title="Oopsie Woopsie!!1",
             description="The code monkeys at our headquarters are working VEWY HAWD to fix this!!1!",
