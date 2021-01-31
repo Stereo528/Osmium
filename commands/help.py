@@ -1,47 +1,46 @@
-import discord
+import discord, json
 from discord.ext import commands
 
 class Example(commands.Cog):
     def __init__(self, client):
         self.client = client
 
+    #ok so new help command, if they dont give a specific command, just send all, otherwise, get info about that command from the helpList
     @commands.command()
-    async def help(self, ctx):
-        coglist = []
-        comlist = []
-        #Since this is a weird command, I will explain what each part does
-        #This will look for all "Cogs" (AKA Categoies) and add them to a list
-        for cog in sorted(self.client.cogs):
-            coglist.append(cog + "\n")
-        for command in self.client.commands:
-            name = command.name
-            comlist.append("." + name + "\n")
-        #This will then convert both lists into strings, with different functions because its different lists
-        def list2str(s):
-            cogstr = " "
-            return (cogstr.join(s))
-        def list2str2(d):
-            comstr = " "
-            return (comstr.join(d))
-        #this is the lists we want to use in above functions
-        s=coglist
-        d=comlist
-        #make embeds and send them
-        cogembed = discord.Embed(
-            title="Categories",
-            description=list2str(s),
-            color=0x134256
-        )
-
-        comembed = discord.Embed(
+    async def help(self, ctx, command=None):
+        #open the file and read its json contents
+        with open("./helpList.json", "r") as helpLoad:
+            helpList = json.load(helpLoad)
+        #create the embed frame, 
+        embed = discord.Embed(
             title="Commands",
-            description=list2str2(d),
-            color=0x134256
+            color=0x123456
         )
+        embed.set_footer("")
+        #List all commands
+        if not command:
+            #seperate each of them from the list
+            def ListToStr(listType):
+                listType=helpList[listType]
+                String="\n".join(listType)
+                return(String)
+            #Add the fields for commands + categories
+            embed.add_field(name="Admin", value=ListToStr("Admin"), inline=False)
+            embed.add_field(name="Util", value=ListToStr("Util"), inline=False)
+            embed.add_field(name="Fun", value=ListToStr("Fun"), inline=False)
+            await ctx.send(embed=embed)
+        else:
+            try:
+                embed.add_field(name=f".{command}", value=helpList[command], inline=False)
+                await ctx.send(embed=embed)
+            except:
+                embed = discord.Embed(
+                    title="Unknown Command",
+                    color=0xff0000,
+                    description=f"The command `.{command}` is not found! Use `.help` to list all commands!")
+                await ctx.send(embed=embed)
+                return
 
-
-        await ctx.send(embed=cogembed)
-        await ctx.send(embed=comembed)
 
 
 def setup(client):

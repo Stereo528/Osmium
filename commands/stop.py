@@ -22,7 +22,7 @@ class Admin(commands.Cog):
         )
         await ctx.send("Stopping...")
         await channel.send(embed=stopembed)
-        await self.client.logout()
+        await self.client.close()
         print("Bot Offline")
         
 def setup(client):

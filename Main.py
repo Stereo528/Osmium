@@ -5,9 +5,6 @@ from datetime import datetime
 
 intents = discord.Intents().all()
 bot = commands.Bot(command_prefix='.', intents=intents, help_command=None)
-today1 = date.today()
-hour1 = datetime.now()
-hourString1 = hour1.strftime("%H:%M:%S")
 
 with open("config.json", "r") as config:
     configloaded = json.load(config)
@@ -32,7 +29,7 @@ def getBot(botParam):
 
 
 # Get Other Things
-def getUser(userID):
+def getUser(userParam):
     return bot.get_user(userID)
 
 
@@ -60,12 +57,13 @@ async def reload(ctx):
                 bot.unload_extension(f'commands.{filename[:-3]}')
                 bot.load_extension(f'commands.{filename[:-3]}')
         await ctx.send("Reloaded Cogs")
-    except:
+    except(e):
         error = discord.Embed(
             title="Oopsie Woopsie!!1",
             description="The code monkeys at our headquarters are working VEWY HAWD to fix this!!1!",
             color=discord.Color.dark_red()
         )
+        error.add_field(name="Fatal Error", value=f"`{e}`", inline=True)
         await ctx.send(embed=error)
 
 
