@@ -81,7 +81,7 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
         embed = discord.Embed(
             title="Unknown Command",
-            color=0xff0000,
+            color=0xbf1300,
             description=f"The command `{ctx.message.content.split(' ')[0]}` is not found! Use `.help` to list all commands!")
         await ctx.send(embed=embed)
         return
