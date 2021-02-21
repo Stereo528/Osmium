@@ -21,7 +21,7 @@ class Admin(commands.Cog):
         
             profileembed = discord.Embed(
                 title=f'User Profile',
-                description=f'{member.mention}\'s Profile \nUser ID: **{member}** \nUser Status: {member.status} \nUser Custom Status: \"{member.activity}\"',
+                description=f'{member.mention}\'s Profile \nUser ID: **{member}** \nUser Status: {member.status} \nUser Custom Status: `{member.activity}`',
                 color=discord.Color.dark_green()
             )
             profileembed.add_field(name="Account Creation Date", value=f'**{createDate[0]} UTC**', inline=True)

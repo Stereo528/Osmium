@@ -10,7 +10,14 @@ with open("config.json", "r") as config:
     configloaded = json.load(config)
 
 OwnerId = configloaded["ownerID"]
-OwnerId=str(OwnerId)
+
+def NoPermsEmbed(missingPerms):
+    NoPerms = discord.Embed(
+        title="Insuffcient Perms",
+        description=f"You Do Not Have {missingPerms}",
+        color=0xff0000
+    )
+    return NoPerms
 
 ############
 
@@ -40,32 +47,41 @@ def getUser(userParam):
 
 @bot.command()
 async def load(ctx, extension):
-    bot.load_extension(f'commands.{extension}')
-    await ctx.send(f"loaded {extension}")
+    if ctx.message.author.id == OwnerId:
+        bot.load_extension(f'commands.{extension}')
+        await ctx.send(f"loaded {extension}")
+    else:
+        await ctx.send(embed=NoPermsEmbed("Bot Owner"))
 
 
 @bot.command()
 async def unload(ctx, extension):
-    bot.unload_extension(f'commands.{extension}')
-    await ctx.send(f"unloaded {extension}")
+    if ctx.message.author.id == OwnerId:
+        bot.unload_extension(f'commands.{extension}')
+        await ctx.send(f"unloaded {extension}")
+    else:
+        await ctx.send(embed=NoPermsEmbed("Bot Owner"))
 
 
 @bot.command(aliases=["relaod"])
 async def reload(ctx):
-    try:
-        for filename in os.listdir('./commands/'):
-            if filename.endswith('.py'):
-                bot.unload_extension(f'commands.{filename[:-3]}')
-                bot.load_extension(f'commands.{filename[:-3]}')
-        await ctx.send("Reloaded Cogs")
-    except e:
-        error = discord.Embed(
-            title="Oopsie Woopsie!!1",
-            description="The code monkeys at our headquarters are working VEWY HAWD to fix this!!1!",
-            color=discord.Color.dark_red()
-        )
-        error.add_field(name="Fatal Error", value=f"`{e}`", inline=True)
-        await ctx.send(embed=error)
+    if ctx.message.author.id == OwnerId:
+        try:
+            for filename in os.listdir('./commands/'):
+                if filename.endswith('.py'):
+                    bot.unload_extension(f'commands.{filename[:-3]}')
+                    bot.load_extension(f'commands.{filename[:-3]}')
+            await ctx.send("Reloaded Cogs")
+        except Exception as e:
+            error = discord.Embed(
+                title="Oopsie Woopsie!!1",
+                description="The code monkeys at our headquarters are working VEWY HAWD to fix this!!1!",
+                color=discord.Color.dark_red()
+            )
+            error.add_field(name="Fatal Error", value=f"`{e}`", inline=True)
+            await ctx.send(embed=error)
+    else:
+        await ctx.send(embed=NoPermsEmbed("Bot Owner"))
 
 
 # load cogs on startup

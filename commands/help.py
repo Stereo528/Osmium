@@ -16,7 +16,7 @@ class Example(commands.Cog):
             title="Commands",
             color=0x123456
         )
-        embed.set_footer("")
+        
         #List all commands
         if not command:
             #seperate each of them from the list
@@ -37,7 +37,7 @@ class Example(commands.Cog):
                 embed = discord.Embed(
                     title="Unknown Command",
                     color=0xff0000,
-                    description=f"The command `.{command}` is not found! Use `.help` to list all commands!")
+                    description=f"The command `.{command}` is not found! Use `.help` with no arguments to list all commands!")
                 await ctx.send(embed=embed)
                 return
 

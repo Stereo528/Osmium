@@ -8,11 +8,10 @@ class Owner(commands.Cog):
 
     @commands.command(aliases=["eval"])
     async def evalcmd(self, ctx, *, args):
-        print(f"lmfao: {OwnerId} hhdhdh: {ctx.message.author.id}")
         if ctx.message.author.id == OwnerId:
             await ctx.send(eval(args))
         else:
-            await ctx.send("You don't have the perms for this")
+            await ctx.send(embed=NoPermsEmbed("Bot Owner"))
 
 
 def setup(client):

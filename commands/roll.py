@@ -7,13 +7,32 @@ class Fun(commands.Cog):
         self.client = client
 
     @commands.command(aliases=["dice", "d"])
-    async def roll(self, ctx, DiceSides, DiceCount=None):
-        DiceSides = int(DiceSides)
-        DiceFinal = randint(1, DiceSides)
+    async def roll(self, ctx, dieSides, dieNum=None, dieAdd=None):
+        
+        rollList = []
+        dieSides=int(dieSides)
+        if not dieNum:
+            dieNum = 1
+        else:
+            dieNum=int(dieNum)
+        if not dieAdd:
+            dieAdd = 0
+        else:
+            dieAdd=int(dieAdd)
+        
+        def roll(sides):
+            dieRoll = randint(1, sides)
+            return dieRoll
+
+        for num in range(dieNum):
+            Roll=roll(dieSides)
+            rollList.append(Roll)
+
         embed = discord.Embed(
-            title=f"Rolling a d{DiceSides}",
-            description=f"You Rolled a {DiceFinal}"
-        )
+                title=f"Rolling {dieNum}d{dieSides}+{dieAdd}",
+                description=f"You Rolled {sum(rollList)+dieAdd}"
+            )
+
         await ctx.send(embed=embed)
 
 
