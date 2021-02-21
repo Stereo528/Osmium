@@ -16,12 +16,12 @@ class Example(commands.Cog):
             title="Commands",
             color=0x123456
         )
-        
+
         #List all commands
         if not command:
             #seperate each of them from the list
             def ListToStr(listType):
-                listType=helpList[listType]
+                listType=sorted(helpList[listType])
                 String="\n".join(listType)
                 return(String)
             #Add the fields for commands + categories

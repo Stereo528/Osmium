@@ -1,6 +1,6 @@
 {
-    "Admin": [".purge", ".stop", ".rename", ".slowmode", ".reload"],
-    "Util": [".about", ".profile", ".help", ".serverinfo", ".ping", ".time"],
+    "Admin": [".purge", ".stop", ".rename", ".slowmode", ".reload", ".dm"],
+    "Util": [".about", ".profile", ".help", ".serverinfo", ".ping", ".time", ".modmail"],
     "Fun": [".flip", ".dingus", ".roll", ".cookie"],
     "about": "Usage: `.about`\nGives info about the bot",
     "profile": "Usage: `.profile [user (Optional)]`\nGives info about the user",
@@ -16,5 +16,7 @@
     "flip": "Usage: `.flip`\nFlip a coin",
     "dingus": "Usage: `.dingus [string]`\nCall someone or something a \"Dingus\"",
     "roll": "Usage: `.roll [sides] [amount (Optional)] [modifier (Optional)]`\nRoll a die with as many sides as you want",
-    "cookie": "Usage: `.cookie [user]`\nGive a cookie to someone...\nHope they aren't allergic to Gluten"
+    "cookie": "Usage: `.cookie [user]`\nGive a cookie to someone...\nHope they aren't allergic to Gluten",
+    "modmail": "Usage: `.modmail [content]`\nDM Only\nSend a message to the staff team",
+    "dm": "Usage: `.dm [user] [content]`\nAdmin Only\nSend a message to a user via DM"
 }
