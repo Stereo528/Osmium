@@ -8,7 +8,7 @@
     "serverinfo": "Usage: `.serverinfo`\nGives info about the server",
     "ping": "Usage: `.ping`\nGets the API response time about the bot",
     "time": "Usage: `.time`\nLists Timezones",
-    "purge": "Usage: `.purge [int]`\nManage Messages\nPurge up to 100 Messages youngert than 2 weeks",
+    "purge": "Usage: `.purge [int]`\nManage Messages\nPurge up to 100 Messages younger than 2 weeks",
     "stop": "Usage: `.stop`\nOwner Only\nStops the bot from running\nOnly Use in Emergency",
     "rename": "Usage: `.rename [string]`\nManage Channels\nRenames a Channel",
     "slowmode": "Usage: `.slowmode [seconds]`\nManage Channels\nChanges the slowmode of a channel",
