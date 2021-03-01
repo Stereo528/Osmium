@@ -39,7 +39,7 @@ def getBot(botParam):
 
 # Get Other Things
 def getUser(userParam):
-    return bot.get_user(userID)
+    return bot.get_user(userParam)
 
 ############
 
