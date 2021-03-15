@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-class Admin(commands.Cog):
+class Util(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -53,4 +53,4 @@ class Admin(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(Admin(client))
+    client.add_cog(Util(client))
