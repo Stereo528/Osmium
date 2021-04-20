@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from config import NoPermsEmbed, getPermissions
+from Main import NoPermsEmbed, getPermissions
 
 class Admin(commands.Cog):
     def __init__(self, client):

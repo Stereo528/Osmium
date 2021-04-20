@@ -8,7 +8,7 @@ class Admin(commands.Cog):
     @commands.command(aliases=["server","serverinfo","guild"])
     async def guildinfo(self, ctx):
 
-        # Might move this to config.py so it can be used in multiple places
+
         server = ctx.guild
 
         ServerName = server.name #

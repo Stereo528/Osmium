@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from config import getBot, getUser, getAlias
+from Main import getBot, getUser, getAlias
 
 Aliases=getAlias("about")
 

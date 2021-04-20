@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from datetime import date
 from datetime import datetime
-from config import NoPermsEmbed, OwnerId
+from Main import NoPermsEmbed, IsOwner
 
 class Admin(commands.Cog):
     def __init__(self, client):
@@ -11,7 +11,7 @@ class Admin(commands.Cog):
 
     @commands.command()
     async def stop(self, ctx):
-        if ctx.message.author.id == OwnerId:
+        if IsOwner(ctx.message.author):
             today = date.today()
             hour = datetime.now()
             hourString = hour.strftime("%H:%M:%S")

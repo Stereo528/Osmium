@@ -1,7 +1,7 @@
 import discord, datetime
 from discord.ext import commands
 from pytz import timezone
-from config import localFormat, timezonelist, getAlias
+from Main import localFormat, timezonelist, getAlias
 
 Aliases = getAlias("time")
 UTC=datetime.datetime.now(timezone('UTC'))
