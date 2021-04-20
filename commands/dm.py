@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from Main import NoPermsEmbed
+from config import NoPermsEmbed, getPermissions
 
 class Admin(commands.Cog):
     def __init__(self, client):
@@ -8,7 +8,7 @@ class Admin(commands.Cog):
 
     @commands.command()
     async def dm(self, ctx, member:discord.Member, *, text):
-        if ctx.message.author.guild_permissions.administrator:
+        if getPermissions("admin"):
             embed = discord.Embed(
                     title="From Osmium",
                 description=text,

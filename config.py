@@ -1,3 +1,15 @@
+import discord, json, os
+
+with open("config.json", "r") as configloader:
+    config = json.load(configloader)
+
+with open("alias.json", "r") as aliasloader:
+    alias = json.load(aliasloader)
+
+
+def token():
+    return config["token"]
+
 def NoPermsEmbed(missingPerms):
     NoPerms = discord.Embed(
         title="Insuffcient Perms",
@@ -7,9 +19,7 @@ def NoPermsEmbed(missingPerms):
     return NoPerms
 
 def IsOwner(userID):
-    with open("config.json", "r") as config:
-        configloaded = json.load(config)
-    OwnerId = configloaded["ownerID"]
+    OwnerId = config["ownerID"]
     if userID == OwnerId:
         return True
     else
@@ -29,3 +39,32 @@ def getBot(botParam):
         return str(bot.user.mention)
     else:
         return "That Parameter Does Not Exist (Yet)"
+
+def getUser(userParam):
+    return bot.get_user(userID)
+
+
+def localFormat():
+    return config["localFormat"]
+def timezonelist():
+    return config["timezonelist"]
+
+
+def getAlias(command):
+    return alias[command]
+
+
+def getPermissions(perm):
+    if perm == "admin":
+        if ctx.message.author.guild_permissions.administrator:
+            return True
+    if perm == "messages":
+        if ctx.message.author.guild_permissions.manage_messages:
+            return True
+    if perm == "channels":
+        if ctx.message.author.guild_permissions.manage_channels:
+            return True
+    if perm == "???":
+        return True
+    else:
+        return False

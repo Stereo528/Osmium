@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from Main import NoPermsEmbed
+from config import NoPermsEmbed, getPermissions
 
 class Admin(commands.Cog):
     def __init__(self, client):
@@ -8,7 +8,7 @@ class Admin(commands.Cog):
 
     @commands.command()
     async def rename(self, ctx, newname):
-        if ctx.message.author.guild_permissions.manage_channels:
+        if getPermissions("channel"):
             oldname=ctx.channel.name
             embed=discord.Embed(
                 title="Channel Renamed",

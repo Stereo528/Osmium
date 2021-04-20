@@ -1,8 +1,7 @@
 import discord
 from discord.ext import commands
-from datetime import date
-from datetime import datetime
-from Main import NoPermsEmbed
+from datetime import date, datetime
+from config import NoPermsEmbed, getPermissions
 
 class Admin(commands.Cog):
     def __init__(self, client):
@@ -10,7 +9,7 @@ class Admin(commands.Cog):
 
     @commands.command()
     async def purge(self, ctx, msgCount):
-        if ctx.message.author.guild_permissions.manage_channels:
+        if getPermissions("messages"):
             today = date.today()
             hour = datetime.now()
             hourString = hour.strftime("%H:%M:%S")

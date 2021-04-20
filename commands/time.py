@@ -1,19 +1,16 @@
 import discord, datetime
 from discord.ext import commands
 from pytz import timezone
+from config import localFormat, timezonelist, getAlias
 
-localFormat = "%Y-%m-%d %H:%M:%S, %Z%z"
-
+Aliases = getAlias("time")
 UTC=datetime.datetime.now(timezone('UTC'))
-
-timezonelist = ["US/Eastern", "US/Central", "US/Mountain", "US/Pacific", "UTC", "Europe/Berlin", "Australia/North", "Australia/South", "Australia/West"]
-
 
 class Util(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(aliases=["timezone", "tz", "tzone", "timez", "timezones"])
+    @commands.command(aliases=Aliases)
     async def time(self, ctx):
         timezones = discord.Embed(
             title="Timezones",

@@ -8,6 +8,7 @@ class Admin(commands.Cog):
     @commands.command(aliases=["server","serverinfo","guild"])
     async def guildinfo(self, ctx):
 
+        # Might move this to config.py so it can be used in multiple places
         server = ctx.guild
 
         ServerName = server.name #
@@ -25,7 +26,7 @@ class Admin(commands.Cog):
         Nitro = f"Nitro Level: {NitroLevel}, Nitro Boosters: {NitroBoosts}"
         MainServerInfo = f"Emoji Limit: {EmojiLimit} \nFilesize Limit: {round(FilesizeLimit/1000000)} megabytes"
         Owner=f"Server Owner: {ServerOwner} \nOwner ID: {ServerOwnerID}"
-        
+
         embed=discord.Embed(
             title=f'Server Info: {ServerName}',
             description=MainServerInfo,

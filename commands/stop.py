@@ -2,13 +2,13 @@ import discord
 from discord.ext import commands
 from datetime import date
 from datetime import datetime
-from Main import NoPermsEmbed, OwnerId
+from config import NoPermsEmbed, OwnerId
 
 class Admin(commands.Cog):
     def __init__(self, client):
         self.client = client
-    
-    
+
+
     @commands.command()
     async def stop(self, ctx):
         if ctx.message.author.id == OwnerId:
@@ -28,6 +28,6 @@ class Admin(commands.Cog):
             print("Bot Offline")
         else:
             await ctx.send(embed=NoPermsEmbed("Bot Owner"))
-        
+
 def setup(client):
     client.add_cog(Admin(client))
