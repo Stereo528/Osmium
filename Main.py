@@ -2,44 +2,10 @@ import discord, json, os
 from discord.ext import commands
 from datetime import date
 from datetime import datetime
+from config import token
 
 intents = discord.Intents().all()
 bot = commands.Bot(command_prefix='.', intents=intents, help_command=None)
-
-with open("config.json", "r") as config:
-    configloaded = json.load(config)
-
-OwnerId = configloaded["ownerID"]
-
-def NoPermsEmbed(missingPerms):
-    NoPerms = discord.Embed(
-        title="Insuffcient Perms",
-        description=f"You Do Not Have {missingPerms}",
-        color=0xff0000
-    )
-    return NoPerms
-
-############
-
-# Get Bot Things
-def getBot(botParam):
-    if not botParam:
-        return "Provide a Valid Parameter"
-    elif botParam == "id":
-        return str(bot.user.id)
-    elif botParam == "avatar_url":
-        return str(bot.user.avatar_url)
-    elif botParam == "created_at":
-        return str(bot.user.created_at)
-    elif botParam == "mention":
-        return str(bot.user.mention)
-    else:
-        return "That Parameter Does Not Exist (Yet)"
-
-
-# Get Other Things
-def getUser(userParam):
-    return bot.get_user(userParam)
 
 ############
 
@@ -113,4 +79,4 @@ async def on_command_error(ctx, error):
 ############
 
 
-bot.run(configloaded["token"])
+bot.run(config.token())
