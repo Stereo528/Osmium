@@ -103,4 +103,4 @@ async def on_command_error(ctx, error):
 async def test(ctx):
     await ctx.send(embed=embedCreator("test", "oh no", 0x123456))
 
-bot.run("NzA3MzE4MTcyNzgwMzMxMDY4.XrHDYQ.eEcUmi5yOxcgdOZzg3DyGP5oIi0")
+bot.run(config["token"])
