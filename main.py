@@ -1,15 +1,17 @@
 import discord, json, os
 from discord.ext import commands
 
-
 intents = discord.Intents().all()
 bot = commands.Bot(command_prefix='.', intents=intents, help_command=None)
 
+############
+
+with open("config.json", "r") as config_loader:
+    config = json.load(config_loader)
+
+############
+
 def embedCreator(title, desc, color):
-    #Hacky stuff
-    #hex_string = "0x" + str(color)
-    #print(hex_string)
-    #print(hex_int)
     embed = discord.Embed(
         title=f"{title}",
         description=f"{desc}",
@@ -17,10 +19,25 @@ def embedCreator(title, desc, color):
     )
     return embed
 
+def IsOwner(userID):
+    OwnerId = config["owner_id"]
+    if userID == OwnerId:
+        return True
+    else:
+        return False
+
+############
+
+
+@bot.command()
+async def stop(ctx):
+    await ctx.send(embed=embedCreator("Stopping", "Shutting Down Bot", 0xFF0000))
+    await bot.logout()
+
 ############
 
 # Load Cogs
-"""
+
 @bot.command()
 async def load(ctx, extension):
     if ctx.message.author.id == OwnerId:
@@ -61,7 +78,7 @@ async def reload(ctx):
 for filename in os.listdir('./commands/'):
     if filename.endswith('.py'):
         bot.load_extension(f'commands.{filename[:-3]}')
-"""
+
 
 
 @bot.event
@@ -84,7 +101,6 @@ async def on_command_error(ctx, error):
 
 @bot.command()
 async def test(ctx):
-    lmao = embedCreator("test", "oh no", 0x123456)
-    await ctx.send(embed=lmao)
+    await ctx.send(embed=embedCreator("test", "oh no", 0x123456))
 
-bot.run("token-here")
+bot.run("NzA3MzE4MTcyNzgwMzMxMDY4.XrHDYQ.eEcUmi5yOxcgdOZzg3DyGP5oIi0")
