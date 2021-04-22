@@ -1,0 +1,5 @@
+{
+    "help": "Shows a full list of commands",
+    "profile": "Shows info about a user",
+    "serverinfo": "shows info about a server"
+}
