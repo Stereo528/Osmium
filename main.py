@@ -6,6 +6,7 @@ bot = commands.Bot(command_prefix='.', intents=intents, help_command=None)
 
 ############
 
+#load config
 with open("config.json", "r") as config_loader:
     config = json.load(config_loader)
 
@@ -31,7 +32,7 @@ def IsOwner(userID):
 
 ############
 
-
+#stop the bot, bot owner onlt
 @bot.command()
 async def stop(ctx):
     if IsOwner(ctx.message.author.id):
@@ -41,9 +42,10 @@ async def stop(ctx):
         await ctx.send(embed=embedCreator("Insuffcient Permissions", "You are not the Owner of this Bot", 0xFF0000))
 
 ############
+#Cog Commands
 
-# Load Cogs
 
+#Load command, loads a specific command
 @bot.command()
 async def load(ctx, extension):
     if IsOwner(ctx.message.author.id):
@@ -52,7 +54,7 @@ async def load(ctx, extension):
     else:
         await ctx.send(embed=embedCreator("Insuffcient Permissions", "You are not the Owner of this Bot", 0xFF0000))
 
-
+#Unload command, Unloads a specific command
 @bot.command()
 async def unload(ctx, extension):
     if IsOwner(ctx.message.author.id):
@@ -61,7 +63,7 @@ async def unload(ctx, extension):
     else:
         await ctx.send(embed=embedCreator("Insuffcient Permissions", "You are not the Owner of this Bot", 0xFF0000))
 
-
+#Reloads all commands
 @bot.command(aliases=["relaod"])
 async def reload(ctx):
     if IsOwner(ctx.message.author.id):
@@ -81,7 +83,7 @@ for filename in os.listdir('./commands/'):
         bot.load_extension(f'commands.{filename[:-3]}')
 
 
-
+#error logger
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):

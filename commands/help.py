@@ -17,17 +17,22 @@ class Util(commands.Cog):
             categoryList = json.load(categoryLoader)
         #Create embed frame
         embed = embedCreator("Commands", "list of all commands", 0x123456)
-        #list all commands
-        if not command:
 
+        #list all commands if no command is passed
+        if not command:
+            #logic for grabbing all of the commands out of the lists of categories
             def ListToStr(listType):
+                #Sort the list so its in alphabetical order (of category name)
                 listType=sorted(categoryList[listType])
+                #New line each of the strings
                 String="\n".join(listType)
                 return(String)
-
+            #Auto bring all of the categories in from the json, no more hardcoding!!
             for category in categoryList:
                 embed.add_field(name=category, value=ListToStr(category), inline=False)
+
             await ctx.send(embed=embed)
+        #Else give the specific command
         else:
             try:
                 embed.add_field(name=f".{command}", value=commandList[command], inline=False)
