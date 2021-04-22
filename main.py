@@ -10,7 +10,10 @@ with open("config.json", "r") as config_loader:
     config = json.load(config_loader)
 
 OwnerId = config["owner_id"]
+
 ############
+
+#Load logic stuffs
 
 def embedCreator(title, desc, color):
     embed = discord.Embed(
