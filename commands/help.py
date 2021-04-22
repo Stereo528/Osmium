@@ -16,7 +16,7 @@ class Util(commands.Cog):
         with open("categoryList.json", "r") as categoryLoader:
             categoryList = json.load(categoryLoader)
         #Create embed frame
-        embed = embedCreator("Commands", None , 0x123456)
+        embed = embedCreator("Commands", "list of all commands", 0x123456)
         #list all commands
         if not command:
 
