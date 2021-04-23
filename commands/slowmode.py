@@ -8,7 +8,7 @@ class Admin(commands.Cog):
         self.client = client
 
     @commands.command(aliases=["slow"])
-    async def slowmode(self, ctx, newspeed):
+    async def slowmode(self, ctx, newSpeed):
         if ctx.message.author.guild_permissions.manage_channels:
             oldSpeed=ctx.channel.slowmode_delay
             embed=embedCreator("Slowmode Changed", f"from {oldSpeed} to {newSpeed}", 0x00FF00)
