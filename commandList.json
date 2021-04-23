@@ -2,5 +2,6 @@
     "help": "Shows a full list of commands",
     "profile": "Shows info about a user",
     "serverinfo": "shows info about a server",
-    "roll": "Rolls Dice with the amount of sides, die, and a modifier"
+    "roll": "Rolls Dice with the amount of sides, die, and a modifier",
+    "slowmode": "Changes the channel's Slowmode Cooldown [Manage Channels]"
 }

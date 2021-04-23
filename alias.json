@@ -1,3 +1,4 @@
 {
-
+  "roll": ["dice", "d"],
+  "slowmode": ["slow"]
 }
