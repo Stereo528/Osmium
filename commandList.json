@@ -1,5 +1,6 @@
 {
     "help": "Shows a full list of commands",
     "profile": "Shows info about a user",
-    "serverinfo": "shows info about a server"
+    "serverinfo": "shows info about a server",
+    "roll": "Rolls Dice with the amount of sides, die, and a modifier"
 }

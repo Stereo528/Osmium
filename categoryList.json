@@ -1,3 +1,4 @@
 {
-  "Util": [".help", ".profile", ".serverinfo"]
+  "Util": [".help", ".profile", ".serverinfo"],
+  "Fun": [".roll"]
 }
