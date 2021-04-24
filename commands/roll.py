@@ -21,12 +21,15 @@ class Fun(commands.Cog):
             return
 
         rollList = []
+        rollListString = []
         for num in range(int(dieNum)):
             Roll=randint(1, int(dieSides))
             rollList.append(Roll)
+            rollListString.append(str(Roll))
 
-        embed = embedCreator(f"Rolling {dieNum}d{dieSides}+{dieAdd}", f"You Rolled {sum(rollList)+dieAdd}", 0x8b0000)
-        embed.add_field(name="Roll Array",  value=f"Full Roles: {rollList}", inline=False)
+        joinedList=", ".join(rollListString)
+        embed = embedCreator(f"Rolling {dieNum}d{dieSides}+{dieAdd}", f"You Rolled: {sum(rollList)+dieAdd}", 0x8b0000)
+        embed.add_field(name="Roll Array",  value=f"Full Roles: {joinedList}", inline=False)
 
         await ctx.send(embed=embed)
 

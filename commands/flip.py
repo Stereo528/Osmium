@@ -21,7 +21,8 @@ class Fun(commands.Cog):
             if coin == 1:
                 flipList.append("Heads")
 
-        embed=embedCreator("Flip a Coin", f"Flipped a coin and got: \n{flipList}", 0xA66969)
+        joinedList=", ".join(flipList)
+        embed=embedCreator("Flip a Coin", f"Flipped a coin and got: \n{joinedList}", 0xA66969)
         await ctx.send(embed=embed)
 
 def setup(client):
