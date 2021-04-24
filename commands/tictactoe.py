@@ -1,5 +1,6 @@
-from discord.ext import commands
 import discord
+from discord.ext import commands
+from main import embedCreator
 
 class tictactoe(commands.Cog):
 	def __init__(self, bot):
@@ -8,43 +9,44 @@ class tictactoe(commands.Cog):
 	@commands.command(aliases = ["ttt"])
 	@commands.cooldown(1, 5, commands.BucketType.user)
 	async def tictactoe(self, ctx, member: discord.Member):
-		await ctx.trigger_typing()
 		if member.bot:
-			return await ctx.send("That is a bot! Please play against a person!")
+			return await ctx.send("You can't play against a Bot.")
 		if member.id == ctx.author.id:
-			return await ctx.send("You can't challenge yourself silly!")
-		message = await ctx.send(f"{member.mention}, {ctx.author.mention} wants to play tic-tac-toe with you! Do you accept?")
+			return await ctx.send("You can't play against yourself.")
+		message = await ctx.send(f"{member.mention}, {ctx.author.mention} wants to play Tic-Tac-Toe with you. Do you accept?")
 		await message.add_reaction("✅")
 		await message.add_reaction("❌")
-		global validGame
-		validGame = None
+
 		def check1(payload):
 			global validGame
+			validGame = None
 			if (str(payload.emoji) == "❌" or str(payload.emoji) == "✅") and payload.message_id == message.id and payload.member.id == member.id:
 				validGame = str(payload.emoji)
 				return True
 		try:
 			await self.bot.wait_for("raw_reaction_add", check = check1, timeout = 60)
 			if not validGame == "✅":
-				await message.edit(content = "The user has declined your request!")
+				await message.edit(embed=embedCreator("User Declined", f"{member.mention} Declined your Request to play.", 0xFF0000), content="")
 				return
 			else:
 				await message.delete()
-		except TimeoutError:
-			await message.edit(content = "The user has not reacted in time!")
+		except Exception as e:
+			await message.edit(content = "", embed=embedCreator("Timed Out", f"{member.mention} didn't react in time.", 0xFF0000))
+			await message.clear_reactions()
 			return
 		players = [{"type":"❌", "id": ctx.author.id, "member": ctx.author.name},{"type":"⭕", "id": str(member.id), "member": member.name}]
 		global player
 		player = -1
 		board = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 		reactions = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣"]
+		boardLines = ["|\_|", "|\_|", "|\_|", "|\_|", "|\_|", "|\_|", "|\_|", "|\_|", "|\_|"]
 		def displayBoard():
 			newBoard = []
 			num = -1
 			for x in board:
 				num += 1
 				condition = " " if not num in [3, 6] else "\n"
-				newBoard.append(f"{condition}{x if not str(x).isnumeric() else reactions[num]}")
+				newBoard.append(f"{condition}{x if not str(x).isnumeric() else boardLines[num]}")
 			return "".join(newBoard)
 		def makeMove(ctx, pos):
 			global player
@@ -122,8 +124,8 @@ class tictactoe(commands.Cog):
 					await ctx.send("That spot is taken!")
 				embed = discord.Embed(title = "Tic-Tac-Toe!", description = displayBoard(), color = discord.Colour.random())
 				await message.edit(content = f"It's {players[player]['member']}'s turn!", embed = embed)
-			except TimeoutError:
-				return await ctx.send("The game has ended as no one reacted in a minute")
+			except Exception as e:
+				return await message.edit(embed=embedCreator("Timed Out", f"{players[player]['member']} did not play in time.", 0xFF0000), content="")
 		global Player
 		if is_tie() == True:
 			await message.edit(content = f"It's a tie!", embed = embed)
