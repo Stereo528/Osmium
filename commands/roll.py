@@ -11,7 +11,7 @@ class Fun(commands.Cog):
     @commands.command(aliases=["dice", "d"])
     async def roll(self, ctx, dieSides, dieNum=1, dieAdd=0):
 
-        if dieSides > 200:
+        if int(dieSides) > 200:
             embed=embedCreator("Too many sides!", "You can only have up to 200 sides.", 0xFF0000)
             await ctx.send(embed=embed)
             return
