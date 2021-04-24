@@ -1,0 +1,24 @@
+import discord
+from discord.ext import commands
+from random import randint
+from main import embedCreator
+
+class Fun(commands.Cog):
+    def __init__(self, client):
+        self.client = client
+
+    @commands.command(aliases=["coin"])
+    async def flip(self, ctx, flips=1):
+        flipList=[]
+        for num in range(flips):
+            coin = randint(0, 1)
+            if coin == 0:
+                flipList.append("Tails")
+            if coin == 1:
+                flipList.append("Heads")
+
+        embed=embedCreator("Flip a Coin", f"Flipped a coin and got: \n{flipList}", 0xA66969)
+        await ctx.send(embed=embed)
+
+def setup(client):
+    client.add_cog(Fun(client))

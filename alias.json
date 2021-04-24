@@ -1,4 +1,5 @@
 {
   "roll": ["dice", "d"],
-  "slowmode": ["slow"]
+  "slowmode": ["slow"],
+  "flip": ["coin"]
 }
