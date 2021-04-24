@@ -2,6 +2,7 @@
     "help": "Shows a full list of commands",
     "profile": "Shows info about a user",
     "serverinfo": "shows info about a server",
-    "roll": "Rolls Dice with the amount of sides, die, and a modifier",
+    "roll": "Rolls up to 50 Dice with a max of 200 sides, and add a modfier.",
+    "flip": "Flips up to 25 Coins",
     "slowmode": "Changes the channel's Slowmode Cooldown [Manage Channels]"
 }
