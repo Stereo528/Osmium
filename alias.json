@@ -1,5 +1,12 @@
 {
   "roll": ["dice", "d"],
   "slowmode": ["slow"],
-  "flip": ["coin"]
+  "flip": ["coin"],
+  "tictactoe": ["ttt"],
+  "help": [],
+  "about": [],
+  "profile": [],
+  "ask": [],
+  "serverinfo": [],
+  "slowmode": []
 }

@@ -1,8 +1,11 @@
 {
-    "help": "Shows a full list of commands",
-    "profile": "Shows info about a user",
-    "serverinfo": "shows info about a server",
+    "help": "Shows a full list of commands.",
+    "profile": "Shows info about a user.",
+    "serverinfo": "shows info about a server.",
     "roll": "Rolls up to 50 Dice with a max of 200 sides, and add a modfier.",
-    "flip": "Flips up to 25 Coins",
-    "slowmode": "Changes the channel's Slowmode Cooldown [Manage Channels]"
+    "flip": "Flips up to 25 Coins.",
+    "tictactoe": "Play TicTacToe agaisnt another member.",
+    "slowmode": "Changes the channel's Slowmode Cooldown [Manage Channels].",
+    "ask": "Dont ask, to ask, just ask."
+
 }

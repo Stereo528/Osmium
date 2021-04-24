@@ -14,6 +14,11 @@ OwnerId = config["owner_id"]
 
 ############
 
+#Load aliases
+with open("alias.json", "r") as alias_loader:
+    alias = json.load(alias_loader)
+
+############
 #Load logic stuffs
 
 def embedCreator(title, desc, color):
@@ -29,6 +34,11 @@ def IsOwner(userID):
         return True
     else:
         return False
+
+def getAlias(cmdName):
+    joinedList=", ".join(alias[cmdName])
+    return joinedList
+
 
 ############
 
