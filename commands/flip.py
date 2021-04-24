@@ -9,6 +9,10 @@ class Fun(commands.Cog):
 
     @commands.command(aliases=["coin"])
     async def flip(self, ctx, flips=1):
+        if flips > 25:
+            embed=embedCreator("Too many Coins!", "You can only flip a max of 25 coins.", 0xFF0000)
+            await ctx.send(embed=embed)
+            return
         flipList=[]
         for num in range(flips):
             coin = randint(0, 1)
