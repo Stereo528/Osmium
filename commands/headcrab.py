@@ -14,21 +14,21 @@ class Fun(commands.Cog):
         with open("headcrabs.json", "r+") as headcrab:
             headcrabJson = json.load(headcrab)
         #20% chance to fail
-        failRate = randint(1, 5)
+        failRate = randint(1, 9)
         #it complains it hasn't been defined, but also useful for showing format
         userHeadcrab = headcrabJson["this is an example"]
 
         try:
             #try to see if there is a userID already there
-            userHeadcrab = headcrabJson[str(member.id)]
+            userHeadcrab = headcrabJson[str(ctx.message.author.id)]
         except KeyError:
             #if not make one
             with open("headcrabs.json", "r+") as headcrabWrite:
                 Data = json.load(headcrabWrite) #Load JSON
-                newData = {f"{member.id}": [0, 0]} #New Data
+                newData = {f"{ctx.message.author.id}": [0, 0]} #New Data
                 Data.update(newData) #Update old data to new data
                 headcrabWrite.seek(0) #Go to start of file
-                json.dump(Data, headcrabWrite) #write it to that file
+                json.dump(Data, headcrabWrite, indent=4) #write it to that file
                 userHeadcrab = [0, 0] #just say their stuff is 0 to prevent it using the example values
         #Counter upper
         def CountUp(state):
@@ -42,12 +42,12 @@ class Fun(commands.Cog):
                     with open('headcrabs.json', 'w') as dest_file:
                         for line in source_file:
                             element = json.loads(line.strip())
-                            if f'{member.id}' in element:
-                                del element[f'{member.id}']
-                        newData={f"{member.id}": [int(userHeadcrab[0])+1, int(userHeadcrab[1])]}
+                            if f'{ctx.message.author.id}' in element:
+                                del element[f'{ctx.message.author.id}']
+                        newData={f"{ctx.message.author.id}": [int(userHeadcrab[0])+1, int(userHeadcrab[1])]}
                         oldData.update(newData)
                         dest_file.seek(0)
-                        json.dump(oldData, dest_file)
+                        json.dump(oldData, dest_file, indent=4)
 
             elif state == "fail":
 
@@ -56,12 +56,12 @@ class Fun(commands.Cog):
                     with open('headcrabs.json', 'w') as dest_file:
                         for line in source_file:
                             element = json.loads(line.strip())
-                            if f'{member.id}' in element:
-                                del element[f'{member.id}']
-                        newData={f"{member.id}": [int(userHeadcrab[0]), int(userHeadcrab[1])+1]}
+                            if f'{ctx.message.author.id}' in element:
+                                del element[f'{ctx.message.author.id}']
+                        newData={f"{ctx.message.author.id}": [int(userHeadcrab[0]), int(userHeadcrab[1])+1]}
                         oldData.update(newData)
                         dest_file.seek(0)
-                        json.dump(oldData, dest_file)
+                        json.dump(oldData, dest_file, indent=4)
             else:
                 #if i somehow mispell or break smth
                 embedCreator("Critical Error", "Somehow Stereo528#1225 messed this up *really badly* \nPlease contact them", 0xFF0000)
