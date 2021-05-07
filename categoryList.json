@@ -1,6 +1,6 @@
 {
   "Util": [".help", ".profile", ".serverinfo"],
-  "Fun": [".roll", ".flip"],
+  "Fun": [".roll", ".flip", ".headcrab"],
   "Admin": [".slowmode"]
 
 }
