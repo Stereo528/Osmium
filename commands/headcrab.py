@@ -3,12 +3,32 @@ from discord.ext import commands
 from random import randint
 from main import embedCreator
 
+
 class Fun(commands.Cog):
     def __init__(self, client):
         self.client = client
 
     @commands.command(aliases=["hc"])
     async def headcrab(self, ctx, member: discord.Member=None):
+        def WinOrLose(test):
+            with open('headcrabs.json', 'r') as source_file:
+                oldData = json.load(source_file)
+                with open('headcrabs.json', 'w') as dest_file:
+                    for line in source_file:
+                        element = json.loads(line.strip())
+                        if f'{ctx.message.author.id}' in element:
+                            del element[f'{ctx.message.author.id}']
+                    if test == True:
+                        newData={f"{ctx.message.author.id}": [int(userHeadcrab[0])+1, int(userHeadcrab[1])]}
+                    elif test == False:
+                        newData={f"{ctx.message.author.id}": [int(userHeadcrab[0]), int(userHeadcrab[1])+1]}
+                    else:
+                        embedCreator("Critical Error", "Somehow Studio528#1225 messed this up *really badly* \nPlease contact them", 0xFF0000)
+                    oldData.update(newData)
+                    dest_file.seek(0)
+                    json.dump(oldData, dest_file, indent=4)
+
+
         if not member:
             member = ctx.message.author
         with open("headcrabs.json", "r+") as headcrab:
@@ -37,34 +57,13 @@ class Fun(commands.Cog):
                 olddata = json.load(Count)
 
             if state == "succeed":
-                with open('headcrabs.json', 'r') as source_file:
-                    oldData = json.load(source_file)
-                    with open('headcrabs.json', 'w') as dest_file:
-                        for line in source_file:
-                            element = json.loads(line.strip())
-                            if f'{ctx.message.author.id}' in element:
-                                del element[f'{ctx.message.author.id}']
-                        newData={f"{ctx.message.author.id}": [int(userHeadcrab[0])+1, int(userHeadcrab[1])]}
-                        oldData.update(newData)
-                        dest_file.seek(0)
-                        json.dump(oldData, dest_file, indent=4)
+                WinOrLose(True)
 
             elif state == "fail":
-
-                with open('headcrabs.json', 'r') as source_file:
-                    oldData = json.load(source_file)
-                    with open('headcrabs.json', 'w') as dest_file:
-                        for line in source_file:
-                            element = json.loads(line.strip())
-                            if f'{ctx.message.author.id}' in element:
-                                del element[f'{ctx.message.author.id}']
-                        newData={f"{ctx.message.author.id}": [int(userHeadcrab[0]), int(userHeadcrab[1])+1]}
-                        oldData.update(newData)
-                        dest_file.seek(0)
-                        json.dump(oldData, dest_file, indent=4)
+                WinOrLose(False)
             else:
                 #if i somehow mispell or break smth
-                embedCreator("Critical Error", "Somehow Stereo528#1225 messed this up *really badly* \nPlease contact them", 0xFF0000)
+                embedCreator("Critical Error", "Somehow Studio528#1225 messed this up *really badly* \nPlease contact them", 0xFF0000)
 
 
 
@@ -80,6 +79,7 @@ class Fun(commands.Cog):
             CountUp("succeed")
 
         await ctx.send(embed=embed)
+
 
 def setup(client):
     client.add_cog(Fun(client))
