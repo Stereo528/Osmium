@@ -11,6 +11,7 @@ with open("config.json", "r") as config_loader:
     config = json.load(config_loader)
 
 OwnerId = config["owner_id"]
+BotLog = config["log_channel"]
 
 ############
 
@@ -39,6 +40,12 @@ def getAlias(cmdName):
     joinedList=", ".join(alias[cmdName])
     return joinedList
 
+
+#WIP Feature to have records and stuff of users stored, yes its json, im too lazy to do anything else tbh
+#def RecordsWriter(filename, varname, data):
+    #with open(filename+".json", "w+") as Writer:
+        #Writing = {f"{varname}": data}
+        #json.dump(Writing, Writer, indent=4)
 
 ############
 
