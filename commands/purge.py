@@ -1,13 +1,13 @@
 import discord, json
 from discord.ext import commands
-from main import embedCreator, BotLog
+from main import embedCreator, BotLog, getAlias
 
 
 class Admin(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(aliases=["massdel"])
+    @commands.command(aliases=getAlias("purge"))
     async def purge(self, ctx, msgCount):
         def JSONwriter(filename, data):
             with open(filename+".json", "w") as Writer:

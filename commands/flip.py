@@ -1,13 +1,13 @@
 import discord
 from discord.ext import commands
 from random import randint
-from main import embedCreator
+from main import embedCreator, getAlias
 
 class Fun(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(aliases=["coin"])
+    @commands.command(aliases=getAlias("flip"))
     async def flip(self, ctx, flips=1):
         if flips > 25:
             embed=embedCreator("Too many Coins!", "You can only flip a max of 25 coins.", 0xFF0000)

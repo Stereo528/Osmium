@@ -1,13 +1,13 @@
 import discord
 from discord.ext import commands
-from main import embedCreator
+from main import embedCreator, getAlias
 
 
 class Admin(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(aliases=["slow"])
+    @commands.command(aliases=getAlias("slowmode"))
     async def slowmode(self, ctx, newSpeed):
         if ctx.message.author.guild_permissions.manage_channels:
             oldSpeed=ctx.channel.slowmode_delay

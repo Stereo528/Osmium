@@ -1,13 +1,13 @@
 import discord
 from discord.ext import commands
 from discord.member import Member
-from main import embedCreator
+from main import embedCreator, getAlias
 
 class Admin(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(aliases=["nick", "name"])
+    @commands.command(aliases=getAlias("nickname"))
     async def nickname(self, ctx, member: discord.Member = None, *, nick = None):
         oldNick = member.nick
         if ctx.message.author.guild_permissions.manage_nicknames:

@@ -1,13 +1,14 @@
 {
-  "roll": ["dice", "d"],
-  "slowmode": ["slow"],
-  "flip": ["coin"],
-  "tictactoe": ["ttt"],
-  "help": [],
-  "about": [],
-  "profile": [],
+  "about": ["info"],
   "ask": [],
-  "serverinfo": [],
+  "flip": ["coin"],
   "headcrab": ["hc"],
-  "nickname": ["nick", "name"]
+  "help": [],
+  "nickname": ["nick", "name"],
+  "profile": [],
+  "purge": ["massdel"],
+  "records": [],
+  "roll": ["dice", "d"],
+  "serverinfo": ["server", "guild"],
+  "slowmode": ["slow"]
 }

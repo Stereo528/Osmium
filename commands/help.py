@@ -6,7 +6,7 @@ class Util(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command()
+    @commands.command(aliases=getAlias("help"))
     async def help(self, ctx, command = None):
 
         #load JSON storing all commands

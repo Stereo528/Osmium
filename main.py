@@ -19,6 +19,10 @@ BotLog = config["log_channel"]
 with open("alias.json", "r") as alias_loader:
     alias = json.load(alias_loader)
 
+#Alias Getter
+def getAlias(command):
+    return alias[command]
+
 ############
 #Load logic stuffs
 
@@ -36,9 +40,9 @@ def IsOwner(userID):
     else:
         return False
 
-def getAlias(cmdName):
-    joinedList=", ".join(alias[cmdName])
-    return joinedList
+#def getAlias(cmdName):
+    #joinedList=", ".join(alias[cmdName])
+    #return joinedList
 
 
 #WIP Feature to have records and stuff of users stored, yes its json, im too lazy to do anything else tbh
@@ -95,10 +99,9 @@ async def reload(ctx):
 
 
 # load cogs on startup
-for filename in os.listdir('./commands/'):
+for filename in sorted(os.listdir('./commands/')):
     if filename.endswith('.py'):
         bot.load_extension(f'commands.{filename[:-3]}')
-
 
 #error logger
 @bot.event

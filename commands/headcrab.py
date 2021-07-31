@@ -1,14 +1,14 @@
 import discord, json
 from discord.ext import commands
 from random import randint
-from main import embedCreator
+from main import embedCreator, getAlias
 
 
 class Fun(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(aliases=["hc"])
+    @commands.command(aliases=getAlias("headcrab"))
     async def headcrab(self, ctx, member: discord.Member=None):
         def WinOrLose(test):
             with open('headcrabs.json', 'r') as source_file:
@@ -33,7 +33,7 @@ class Fun(commands.Cog):
             member = ctx.message.author
         with open("headcrabs.json", "r+") as headcrab:
             headcrabJson = json.load(headcrab)
-        #20% chance to fail
+        #11% chance to fail
         failRate = randint(1, 9)
         #it complains it hasn't been defined, but also useful for showing format
         userHeadcrab = headcrabJson["this is an example"]
@@ -71,8 +71,7 @@ class Fun(commands.Cog):
         embed = embedCreator("", f"{ctx.message.author.mention} threw a Headcrab at {member.mention}. (Headcrab #{int(userHeadcrab[0])+1})", 0x8dd594)
 
         if failRate == 1:
-            embed = embedCreator("", f"{ctx.message.author.mention} tried to Headcrab {member.mention}, but failed. (Headcrab Fail #{int(userHeadcrab[1])+1})", 0x8dd594)
-            embed.set_image(url="https://i.hiitsdevin.dev/bot/headcrab_fail.gif")
+            embed = embedCreator("", f"{ctx.message.author.mention} tried to Headcrab {member.mention}, but failed. (Headcrab Fail #{int(userHeadcrab[1])+1})", 0x8dd594).set_image(url="https://i.hiitsdevin.dev/bot/headcrab_fail.gif")
             CountUp("fail")
         else:
             embed.set_image(url="https://i.hiitsdevin.dev/bot/headcrab_success.gif")

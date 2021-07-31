@@ -1,11 +1,12 @@
 import discord
 from discord.ext import commands
+from main import getAlias
 
 class Util(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command()
+    @commands.command(aliases=getAlias("serverinfo"))
     async def serverinfo(self, ctx):
         embed = discord.Embed(
             title=f"Info for {ctx.guild.name}",

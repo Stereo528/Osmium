@@ -1,3 +1,4 @@
+from main import getAlias
 import discord
 from discord.ext import commands
 
@@ -5,7 +6,7 @@ class Util(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command()
+    @commands.command(aliases=getAlias("profile"))
     async def profile(self, ctx, member: discord.Member = None):
         if not member:
             member = ctx.message.author

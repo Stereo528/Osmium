@@ -2,13 +2,13 @@
 import discord
 from discord.ext import commands
 from random import randint
-from main import embedCreator
+from main import embedCreator, getAlias
 
 class Fun(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(aliases=["dice", "d"])
+    @commands.command(aliases=getAlias("roll"))
     async def roll(self, ctx, dieSides, dieNum=1, dieAdd=0):
 
         if int(dieSides) > 200:
