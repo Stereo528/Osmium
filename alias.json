@@ -8,6 +8,6 @@
   "profile": [],
   "ask": [],
   "serverinfo": [],
-  "slowmode": [],
-  "headcrab": ["hc"]
+  "headcrab": ["hc"],
+  "nickname": ["nick", "name"]
 }
