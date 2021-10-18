@@ -2,7 +2,9 @@
  Repository for the Osmium Bot in Discord.py, a Python wrapper for the Discord API.
 
 # THIS REPO HAS BEEN "ARCHIVED" FOR THE TIME BEING
-  HOWEVER: If a suitable discord.py fork comes along I may switch to it
+  HOWEVER: If a suitable discord.py fork comes along I may switch to it.
+  
+ 
   I'm aware pycord (the current main fork of discord.py) exists, but I am rewriting my bot in discord.js currently.
 
 ## Instructions
