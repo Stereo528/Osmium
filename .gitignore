@@ -5,5 +5,6 @@ config.json
 commands/__pycache__/*
 __pycache__/*
 ./mypy_cache/*
+records.json
 purge_records.json
 headcrabs.json
