@@ -43,6 +43,10 @@ def IsOwner(userID):
     else:
         return False
 
+def ListToStr(list):
+    String="\n".join(list)
+    return(String)
+
 #def getAlias(cmdName):
     #joinedList=", ".join(alias[cmdName])
     #return joinedList

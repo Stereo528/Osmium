@@ -9,8 +9,7 @@ class Admin(commands.Cog):
     @commands.command(aliases=getAlias("ping"))
     async def ping(self, ctx):
         apiping = int(self.client.latency * 1000)
-        embed=embedCreator("API Latency", f"{apiping}ms", discord.Color.blurple())
-        await ctx.send(embed=embed)
+        await ctx.send(embed=embedCreator("API Latency", f"{apiping}ms", discord.Color.blurple()))
 
 def setup(client):
     client.add_cog(Admin(client))
