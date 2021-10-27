@@ -1,9 +1,6 @@
 import discord, json, os
 from discord.ext import commands
 
-intents = discord.Intents().all()
-bot = commands.Bot(command_prefix='os.', intents=intents, help_command=None)
-
 ############
 
 #load config
@@ -12,6 +9,12 @@ with open("config.json", "r") as config_loader:
 
 OwnerId = config["owner_id"]
 BotLog = config["log_channel"]
+prefix = config["prefix"]
+
+############
+
+intents = discord.Intents().all()
+bot = commands.Bot(command_prefix=prefix, intents=intents, help_command=None)
 
 ############
 

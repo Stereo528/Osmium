@@ -6,6 +6,11 @@
     "flip": "Flips up to 25 Coins.",
     "slowmode": "Changes the channel's Slowmode Cooldown [Manage Channels].",
     "ask": "Dont ask, to ask, just ask.",
-    "headcrab": "Throw a headcrab at anyone!"
+    "headcrab": "Throw a headcrab at anyone!",
+    "about": "Info about the bot.",
+    "ping": "Show the latency of the bot to the Discord API.",
+    "nickname": "Change the nickname of anyone lower than the bot.",
+    "purge": "Delete up to 100, 13 day old, messages. (Discord API Limitation)",
+    "records": "Show the moderation record of a given user."
 
 }

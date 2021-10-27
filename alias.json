@@ -5,6 +5,7 @@
   "headcrab": ["hc"],
   "help": [],
   "nickname": ["nick", "name"],
+  "ping": ["latency"],
   "profile": [],
   "purge": ["massdel"],
   "records": [],

@@ -1,6 +1,6 @@
 {
-  "Util": [".help", ".profile", ".serverinfo"],
-  "Fun": [".roll", ".flip", ".headcrab"],
-  "Admin": [".slowmode"]
+  "Util": ["help", "profile", "serverinfo", "ping", "about"],
+  "Fun": ["roll", "flip", "headcrab"],
+  "Admin": ["slowmode", "nickname", "purge", "records"]
 
 }

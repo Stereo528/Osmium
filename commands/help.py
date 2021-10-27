@@ -1,6 +1,6 @@
 import discord, json
 from discord.ext import commands
-from main import embedCreator, getAlias
+from main import embedCreator, getAlias, prefix
 
 class Util(commands.Cog):
     def __init__(self, client):
@@ -38,10 +38,10 @@ class Util(commands.Cog):
         #Else give the specific command
         else:
             try:
-                embed.add_field(name=f".{command}", value=f"{commandList[command]}, \nAliases: `{getAlias(command)}`", inline=False)
+                embed.add_field(name=f"{prefix}{command}", value=f"{commandList[command]}, \nAliases: `{getAlias(command)}`", inline=False)
                 await ctx.send(embed=embed)
             except:
-                embed = embedCreator("Unknown Command", f"The command `.{command}` is not found! Use `.help` with no arguments to list all commands!", 0xFF0000)
+                embed = embedCreator("Unknown Command", f"The command `{prefix}{command}` is not found! Use `{prefix}help` with no arguments to list all commands!", 0xFF0000)
                 await ctx.send(embed=embed)
                 return
 
