@@ -71,10 +71,10 @@ class Fun(commands.Cog):
         embed = embedCreator("", f"{ctx.message.author.mention} threw a Headcrab at {member.mention}. (Headcrab #{int(userHeadcrab[0])+1})", 0x8dd594)
 
         if failRate == 1:
-            embed = embedCreator("", f"{ctx.message.author.mention} tried to Headcrab {member.mention}, but failed. (Headcrab Fail #{int(userHeadcrab[1])+1})", 0x8dd594).set_image(url="https://i.hiitsdevin.dev/bot/headcrab_fail.gif")
+            embed = embedCreator("", f"{ctx.message.author.mention} tried to Headcrab {member.mention}, but failed. (Headcrab Fail #{int(userHeadcrab[1])+1})", 0x8dd594).set_image(url="https://cdn.discordapp.com/attachments/834263755939512351/902748131429580892/headcrab_fail.gif")
             CountUp("fail")
         else:
-            embed.set_image(url="https://i.hiitsdevin.dev/bot/headcrab_success.gif")
+            embed.set_image(url="https://cdn.discordapp.com/attachments/834263755939512351/902748120100773959/headcrab_success.gif")
             CountUp("succeed")
 
         await ctx.send(embed=embed)
