@@ -11,6 +11,6 @@
     "ping": "Show the latency of the bot to the Discord API.",
     "nickname": "Change the nickname of anyone lower than the bot.",
     "purge": "Delete up to 100, 13 day old, messages. (Discord API Limitation)",
-    "records": "Show the moderation record of a given user."
-
+    "records": "Show the moderation record of a given user.",
+    "warn": "Add a permanent record to a user, with no consequences."
 }

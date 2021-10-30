@@ -11,5 +11,6 @@
   "records": [],
   "roll": ["dice", "d"],
   "serverinfo": ["server", "guild"],
-  "slowmode": ["slow"]
+  "slowmode": ["slow"],
+  "warn": []
 }

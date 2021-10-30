@@ -1,5 +1,5 @@
-from typing import List
-from discord.member import Member
+#from typing import List
+#from discord.member import Member
 from main import embedCreator, getAlias, ListToStr
 import discord
 import json
@@ -16,7 +16,7 @@ class Admin(commands.Cog):
         else:
             with open("records.json", "r+") as recordsLdr:
                 records = json.load(recordsLdr)
-            embed = embedCreator("Records", f"Records For: {user}", 0x123456)
+            embed = embedCreator("Records", f"Records For: {user.mention}", 0x123456)
             
             for record in records[user]:
                 await ctx.send([record])

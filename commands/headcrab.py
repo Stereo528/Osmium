@@ -10,6 +10,7 @@ class Fun(commands.Cog):
 
     @commands.command(aliases=getAlias("headcrab"))
     async def headcrab(self, ctx, member: discord.Member=None):
+        
         def WinOrLose(test):
             with open('headcrabs.json', 'r') as source_file:
                 oldData = json.load(source_file)
@@ -50,37 +51,18 @@ class Fun(commands.Cog):
                 headcrabWrite.seek(0) #Go to start of file
                 json.dump(Data, headcrabWrite, indent=4) #write it to that file
                 userHeadcrab = [0, 0] #just say their stuff is 0 to prevent it using the example values
-        #Counter upper
-        def CountUp(state):
-            #Load json to write to
-            with open("headcrabs.json", "r+") as Count:
-                olddata = json.load(Count)
-
-            if state == "succeed":
-                WinOrLose(True)
-
-            elif state == "fail":
-                WinOrLose(False)
-            else:
-                #if i somehow mispell or break smth
-                embedCreator("Critical Error", "Somehow Studio528#1225 messed this up *really badly* \nPlease contact them", 0xFF0000)
-
-
-
 
         embed = embedCreator("", f"{ctx.message.author.mention} threw a Headcrab at {member.mention}. (Headcrab #{int(userHeadcrab[0])+1})", 0x8dd594)
 
         if failRate == 1:
             embed = embedCreator("", f"{ctx.message.author.mention} tried to Headcrab {member.mention}, but failed. (Headcrab Fail #{int(userHeadcrab[1])+1})", 0x8dd594).set_image(url="https://cdn.discordapp.com/attachments/834263755939512351/902748131429580892/headcrab_fail.gif")
-            CountUp("fail")
+            WinOrLose(False)
         else:
             embed.set_image(url="https://cdn.discordapp.com/attachments/834263755939512351/902748120100773959/headcrab_success.gif")
-            CountUp("succeed")
+            WinOrLose(True)
 
         await ctx.send(embed=embed)
 
 
 def setup(client):
     client.add_cog(Fun(client))
-# before adding writing of new values, this is at 42 lines, lets see what it is after...
-#so far at 78
